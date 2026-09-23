@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projetos UEFA - Nations League & Eurocopa</title>
+  <meta name="description" content="Central de torneios UEFA: tabelas, classificações e jogos da Nations League e Eurocopa 2028.">
+  <meta name="theme-color" content="#0f172a">
   <link rel="stylesheet" href="css/nations.css">
   <link rel="shortcut icon" href="img/logo_nations.png" type="image/x-icon">
   <style>
@@ -18,17 +20,81 @@
       margin-bottom: 0.4rem;
     }
     .portal-subtitle {
-      color: var(--text-muted, #94a3b8);
+      color: var(--texto-suave);
       margin-bottom: 2rem;
     }
-    
-    /* Widget de Destaque / Apresentação */
+
+    /* ===== Header extras: favorito ===== */
+    .header-favorite {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.8rem;
+      vertical-align: middle;
+      cursor: default;
+      transition: opacity 0.2s ease;
+    }
+    .header-favorite.hidden { display: none; }
+    .header-favorite button {
+      background: none;
+      border: none;
+      color: inherit;
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 0.9rem;
+      line-height: 1;
+      padding: 0;
+    }
+    .header-favorite button:hover { opacity: 1; }
+
+    /* ===== Seletor de seleção favorita ===== */
+    .favorite-picker {
+      max-width: 950px;
+      margin: 0 auto 2rem;
+      padding: 0 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .favorite-picker label {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+    }
+    .favorite-picker select {
+      background: var(--azul-painel);
+      color: inherit;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.9rem;
+    }
+    .favorite-picker button {
+      background: var(--vermelho);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ===== Widget de Destaque / Apresentação (odômetro) ===== */
     .portal-hero-banner {
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(15, 23, 42, 0.8));
       border: 1px solid rgba(59, 130, 246, 0.3);
       border-radius: 12px;
       padding: 1.2rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -43,13 +109,80 @@
     .hero-stat-value {
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--primary-color, #38bdf8);
+      color: var(--dourado);
+      font-variant-numeric: tabular-nums;
     }
     .hero-stat-label {
       font-size: 0.8rem;
-      color: var(--text-muted, #94a3b8);
+      color: var(--texto-suave);
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+
+    /* ===== Widget Próximo Jogo ===== */
+    .next-match-widget {
+      background: var(--azul-painel);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 1.3rem 1.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      text-align: left;
+    }
+    .next-match-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #fbbf24;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .next-match-teams {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .next-match-teams .vs {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      font-weight: 500;
+    }
+    .next-match-meta {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+      margin-top: 0.3rem;
+    }
+    .next-match-countdown {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .countdown-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      min-width: 55px;
+    }
+    .countdown-box .num {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #38bdf8;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-box .unit {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+      letter-spacing: 0.4px;
     }
 
     /* Grid de Cards */
@@ -62,8 +195,8 @@
     }
     .portal-card {
       position: relative;
-      background: var(--bg-card, #1e293b);
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+      background: var(--azul-painel);
+      border: 1px solid var(--borda);
       border-radius: 16px;
       padding: 2.2rem 1.5rem 1.8rem;
       text-decoration: none;
@@ -104,12 +237,65 @@
       color: #fbbf24;
       border: 1px solid rgba(251, 191, 36, 0.3);
     }
+
+    /* Favoritar (estrela) no card */
+    .fav-star {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      line-height: 1;
+      z-index: 2;
+    }
+    .fav-star:hover { opacity: 0.8; transform: scale(1.15); }
+    .fav-star.is-fav { opacity: 1; }
+
+    /* Skeleton loading para as imagens dos cards */
+    .portal-card .img-wrap {
+      position: relative;
+      height: 90px;
+      width: 90px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .img-skeleton {
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.06) 25%,
+        rgba(255,255,255,0.14) 37%,
+        rgba(255,255,255,0.06) 63%
+      );
+      background-size: 400% 100%;
+      animation: skeletonShine 1.4s ease infinite;
+    }
+    .img-skeleton.done { display: none; }
+    @keyframes skeletonShine {
+      0% { background-position: 100% 0; }
+      100% { background-position: 0 0; }
+    }
     .portal-card img {
       height: 90px;
       width: auto;
+      max-width: 90px;
       object-fit: contain;
-      margin-bottom: 1.5rem;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .portal-card img.loaded {
+      opacity: 1;
     }
     .portal-card h2 {
       font-size: 1.4rem;
@@ -117,7 +303,7 @@
     }
     .portal-card p {
       font-size: 0.9rem;
-      color: var(--text-muted, #94a3b8);
+      color: var(--texto-suave);
       line-height: 1.45;
       margin-bottom: 1.5rem;
     }
@@ -125,7 +311,7 @@
       margin-top: auto;
       padding: 0.65rem 1.4rem;
       border-radius: 8px;
-      background: var(--primary-color, #2563eb);
+      background: var(--vermelho);
       color: #fff;
       font-weight: 600;
       font-size: 0.9rem;
@@ -136,41 +322,139 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    @media (max-width: 560px) {
+      .next-match-widget { flex-direction: column; align-items: flex-start; }
+      .next-match-countdown { align-self: stretch; justify-content: space-between; }
+    }
+
+    /* Lista dos jogos seguintes (além do próximo em destaque) */
+    .upcoming-matches-list {
+      max-width: 950px;
+      margin: -1.5rem auto 2.5rem;
+      padding: 0 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .upcoming-match-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--azul-painel);
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+      text-align: left;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .upcoming-match-row .teams {
+      font-weight: 600;
+    }
+    .upcoming-match-row .teams .vs {
+      color: var(--texto-suave);
+      font-weight: 400;
+      margin: 0 0.35rem;
+    }
+    .upcoming-match-row .when {
+      color: var(--texto-suave);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    /* Bandeira pequena inserida via flagImg() do common.js */
+    .flag-mini {
+      width: 20px;
+      height: auto;
+      vertical-align: middle;
+      border-radius: 2px;
+      margin-right: 0.3rem;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+    }
   </style>
 </head>
 <body>
 
 <header class="site-header">
   <button id="themeToggle" class="theme-toggle" title="Alternar tema claro/escuro">🌙</button>
-  <h1>Projetos <span>UEFA</span></h1>
+  <h1>Projetos <span>UEFA</span>
+    <span id="headerFavorite" class="header-favorite hidden">
+      ⭐ <span id="headerFavoriteName"></span>
+      <button id="headerFavoriteRemove" title="Remover favorito">✕</button>
+    </span>
+  </h1>
 </header>
 
 <main class="portal-container">
   <h2 class="portal-title">Central de Torneios</h2>
   <p class="portal-subtitle">Escolha a competição para ver tabelas, jogos e classificações</p>
 
-  <!-- Banner com Estatísticas Rápidas -->
+  <!-- Seletor de seleção favorita -->
+  <div class="favorite-picker">
+    <label for="favoriteSelect">Sua seleção favorita:</label>
+    <select id="favoriteSelect">
+      <option value="">Selecionar...</option>
+      <option value="Portugal">Portugal</option>
+      <option value="Espanha">Espanha</option>
+      <option value="França">França</option>
+      <option value="Alemanha">Alemanha</option>
+      <option value="Inglaterra">Inglaterra</option>
+      <option value="Itália">Itália</option>
+      <option value="Países Baixos">Países Baixos</option>
+      <option value="Bélgica">Bélgica</option>
+      <option value="Croácia">Croácia</option>
+    </select>
+    <button id="favoriteSaveBtn">Salvar</button>
+  </div>
+
+ <!-- Banner com Estatísticas Rápidas (odômetro) -->
   <div class="portal-hero-banner">
     <div class="hero-stat-item">
-      <span class="hero-stat-value">54</span>
+      <span class="hero-stat-value" id="statSelecoes" data-target="54">0</span>
       <span class="hero-stat-label">Seleções Ativas</span>
     </div>
     <div class="hero-stat-item">
-      <span class="hero-stat-value">2</span>
-      <span class="hero-stat-label">Projetos Integ.</span>
+      <span class="hero-stat-value" id="statTotalJogos" data-target="156">0</span>
+      <span class="hero-stat-label">Total de Jogos</span>
     </div>
     <div class="hero-stat-item">
-      <span class="hero-stat-value">2026/2028</span>
+      <span class="hero-stat-value" id="statTemporadas" data-target="2026" data-suffix="/2028">0</span>
       <span class="hero-stat-label">Temporadas</span>
     </div>
   </div>
+
+  <!-- Widget Próximo Jogo -->
+  <div class="next-match-widget" id="nextMatchWidget">
+    <div>
+      <div class="next-match-label" id="nextMatchLabel">Próximo Jogo</div>
+      <div class="next-match-teams" id="nextMatchTeams">Carregando...</div>
+      <div class="next-match-meta" id="nextMatchMeta"></div>
+    </div>
+    <div class="next-match-countdown" id="nextMatchCountdown">
+      <div class="countdown-box"><span class="num" id="cdDays">--</span><span class="unit">dias</span></div>
+      <div class="countdown-box"><span class="num" id="cdHours">--</span><span class="unit">horas</span></div>
+      <div class="countdown-box"><span class="num" id="cdMinutes">--</span><span class="unit">min</span></div>
+      <div class="countdown-box"><span class="num" id="cdSeconds">--</span><span class="unit">seg</span></div>
+    </div>
+  </div>
+
+  <!-- Lista dos jogos seguintes -->
+  <div class="upcoming-matches-list" id="upcomingMatchesList"></div>
 
   <!-- Cards de Seleção -->
   <div class="portal-grid">
     <!-- Card Nations League -->
     <a href="nations.html" class="portal-card nations" aria-label="Acessar UEFA Nations League">
+      <button class="fav-star" data-fav-id="nations" title="Favoritar Nations League">☆</button>
       <span class="portal-badge active-badge">Edição 26/27</span>
-      <img src="img/logo_nations.png" alt="Logo Nations League" onerror="this.style.display='none'">
+      <span class="img-wrap">
+        <span class="img-skeleton"></span>
+        <img src="img/logo_nations.png" alt="Logo Nations League"
+             onload="this.classList.add('loaded'); this.previousElementSibling.classList.add('done');"
+             onerror="this.style.display='none'; this.previousElementSibling.classList.add('done');">
+      </span>
       <h2>UEFA Nations League</h2>
       <p>Classificação das Ligas A, B, C e D, tabelas de jogos, Final Four e galeira de campeões.</p>
       <span class="portal-btn">Acessar Nations</span>
@@ -178,8 +462,14 @@
 
     <!-- Card Eurocopa -->
     <a href="euro.html" class="portal-card euro" aria-label="Acessar Eurocopa 2028">
+      <button class="fav-star" data-fav-id="euro" title="Favoritar Eurocopa 2028">☆</button>
       <span class="portal-badge upcoming-badge">Sedes 2028</span>
-      <img src="img/logo_euro_2028.png" alt="Logo Eurocopa 2028" onerror="this.style.display='none'">
+      <span class="img-wrap">
+        <span class="img-skeleton"></span>
+        <img src="img/logo_euro_2028.png" alt="Logo Eurocopa 2028"
+             onload="this.classList.add('loaded'); this.previousElementSibling.classList.add('done');"
+             onerror="this.style.display='none'; this.previousElementSibling.classList.add('done');">
+      </span>
       <h2>Eurocopa 2028</h2>
       <p>Fase de apuramento, sedes oficiais (Reino Unido e Irlanda) e histórico do torneio.</p>
       <span class="portal-btn">Acessar Eurocopa</span>
@@ -192,5 +482,234 @@
 </footer>
 
 <script src="js/common.js"></script>
+<script>
+(function () {
+  /* ============================================================
+     1) ODÔMETRO — números contando ao carregar o hero banner
+  ============================================================ */
+  function animateCount(el, duration) {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const value = Math.floor(eased * target);
+      el.textContent = value + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = target + suffix;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  document.querySelectorAll('.hero-stat-value[data-target]').forEach(function (el) {
+    animateCount(el, 1200);
+  });
+
+  /* ============================================================
+     2) SKELETON LOADING — fallback para imagens já em cache
+     (onload/onerror inline cobre o caso normal; isto cobre o
+     caso de imagem já estar no cache do navegador antes do JS rodar)
+  ============================================================ */
+  document.querySelectorAll('.portal-card img').forEach(function (img) {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('loaded');
+      var sk = img.previousElementSibling;
+      if (sk) sk.classList.add('done');
+    }
+  });
+
+  /* ============================================================
+     3) FAVORITOS — seleção favorita (localStorage) + atalho no header
+  ============================================================ */
+  var FAVORITE_TEAM_KEY = 'uefa_favorite_team';
+  var FAVORITE_CARDS_KEY = 'uefa_favorite_cards';
+
+  var favoriteSelect = document.getElementById('favoriteSelect');
+  var favoriteSaveBtn = document.getElementById('favoriteSaveBtn');
+  var headerFavorite = document.getElementById('headerFavorite');
+  var headerFavoriteName = document.getElementById('headerFavoriteName');
+  var headerFavoriteRemove = document.getElementById('headerFavoriteRemove');
+
+  function loadFavoriteTeam() {
+    try {
+      var saved = localStorage.getItem(FAVORITE_TEAM_KEY);
+      if (saved) {
+        headerFavoriteName.innerHTML = (typeof flagImg === 'function' ? flagImg(saved, 'flag-mini') : '') + ' ' + saved;
+        headerFavorite.classList.remove('hidden');
+        favoriteSelect.value = saved;
+      } else {
+        headerFavorite.classList.add('hidden');
+      }
+    } catch (e) {
+      console.warn('LocalStorage indisponível:', e);
+    }
+  }
+
+  favoriteSaveBtn.addEventListener('click', function () {
+    var value = favoriteSelect.value;
+    if (!value) return;
+    try {
+      localStorage.setItem(FAVORITE_TEAM_KEY, value);
+      loadFavoriteTeam();
+    } catch (e) {
+      console.warn('Não foi possível salvar o favorito:', e);
+    }
+  });
+
+  headerFavoriteRemove.addEventListener('click', function () {
+    try {
+      localStorage.removeItem(FAVORITE_TEAM_KEY);
+      favoriteSelect.value = '';
+      headerFavorite.classList.add('hidden');
+    } catch (e) {
+      console.warn('Não foi possível remover o favorito:', e);
+    }
+  });
+
+  loadFavoriteTeam();
+
+  /* Favoritar torneio (estrela no card) */
+  function loadFavoriteCards() {
+    try {
+      return JSON.parse(localStorage.getItem(FAVORITE_CARDS_KEY) || '[]');
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveFavoriteCards(list) {
+    try {
+      localStorage.setItem(FAVORITE_CARDS_KEY, JSON.stringify(list));
+    } catch (e) {
+      console.warn('Não foi possível salvar favoritos de torneio:', e);
+    }
+  }
+
+  var favCards = loadFavoriteCards();
+  document.querySelectorAll('.fav-star').forEach(function (btn) {
+    var id = btn.dataset.favId;
+    if (favCards.indexOf(id) !== -1) {
+      btn.textContent = '★';
+      btn.classList.add('is-fav');
+    }
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var list = loadFavoriteCards();
+      var idx = list.indexOf(id);
+      if (idx === -1) {
+        list.push(id);
+        btn.textContent = '★';
+        btn.classList.add('is-fav');
+      } else {
+        list.splice(idx, 1);
+        btn.textContent = '☆';
+        btn.classList.remove('is-fav');
+      }
+      saveFavoriteCards(list);
+    });
+  });
+
+  /* ============================================================
+     4) WIDGET "PRÓXIMO JOGO" — dados locais + contagem regressiva
+     Troque o array MATCHES pela sua fonte real (API/JSON) depois.
+  ============================================================ */
+  var MATCHES = [
+    { home: 'Portugal', away: 'País de Gales', date: '2026-09-24T15:45:00', competition: 'Nations League • Grupo A4' },
+    { home: 'Itália', away: 'Bélgica', date: '2026-09-25T15:45:00', competition: 'Nations League • Grupo A1' },
+    { home: 'Turquia', away: 'França', date: '2026-09-25T15:45:00', competition: 'Nations League • Grupo A1' },
+    { home: 'Inglaterra', away: 'Espanha', date: '2026-09-26T15:45:00', competition: 'Nations League • Grupo A3' }
+  ];
+
+  /* Monta "<bandeira> Nome" usando flagImg() do common.js (mesmo padrão
+     das outras páginas). Se a função não existir por algum motivo, cai
+     de volta pro nome puro sem quebrar nada. */
+  function teamLabel(name) {
+    var flag = (typeof flagImg === 'function') ? flagImg(name, 'flag-mini') : '';
+    return flag + ' ' + name;
+  }
+
+  var nextMatchTeams = document.getElementById('nextMatchTeams');
+  var nextMatchMeta = document.getElementById('nextMatchMeta');
+  var nextMatchLabel = document.getElementById('nextMatchLabel');
+  var cdDays = document.getElementById('cdDays');
+  var cdHours = document.getElementById('cdHours');
+  var cdMinutes = document.getElementById('cdMinutes');
+  var cdSeconds = document.getElementById('cdSeconds');
+
+  function getUpcomingMatches() {
+    var now = new Date();
+    return MATCHES
+      .map(function (m) { return { data: m, time: new Date(m.date).getTime() }; })
+      .filter(function (m) { return m.time > now.getTime(); })
+      .sort(function (a, b) { return a.time - b.time; });
+  }
+
+  var upcomingList = getUpcomingMatches();
+  var current = upcomingList.length ? upcomingList[0] : null;
+  var restOfList = upcomingList.slice(1); // os demais, exibidos abaixo
+  var countdownTimer = null;
+
+  /* Renderiza os jogos seguintes (além do destaque) */
+  var upcomingMatchesListEl = document.getElementById('upcomingMatchesList');
+  if (restOfList.length) {
+    restOfList.forEach(function (item) {
+      var mm = item.data;
+      var dObj = new Date(mm.date);
+      var dStr = dObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+      var tStr = dObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      var row = document.createElement('div');
+      row.className = 'upcoming-match-row';
+      row.innerHTML =
+        '<span class="teams">' + teamLabel(mm.home) + '<span class="vs">vs</span>' + teamLabel(mm.away) + '</span>' +
+        '<span class="when">' + mm.competition + ' • ' + dStr + ' às ' + tStr + '</span>';
+      upcomingMatchesListEl.appendChild(row);
+    });
+  }
+
+  if (!current) {
+    nextMatchLabel.textContent = 'Próximo Jogo';
+    nextMatchTeams.textContent = 'Nenhum jogo agendado no momento';
+    nextMatchMeta.textContent = '';
+    document.getElementById('nextMatchCountdown').style.display = 'none';
+  } else {
+    var m = current.data;
+    var favSelected = null;
+    try { favSelected = localStorage.getItem(FAVORITE_TEAM_KEY); } catch (e) {}
+    if (favSelected && (m.home === favSelected || m.away === favSelected)) {
+      nextMatchLabel.textContent = '⭐ Próximo jogo da sua seleção';
+    }
+    nextMatchTeams.innerHTML = teamLabel(m.home) + ' <span class="vs">vs</span> ' + teamLabel(m.away);
+    var dateObj = new Date(m.date);
+    var dateStr = dateObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+    var timeStr = dateObj.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    nextMatchMeta.textContent = m.competition + ' • ' + dateStr + ' às ' + timeStr;
+
+    function updateCountdown() {
+      var diff = current.time - Date.now();
+      if (diff <= 0) {
+        clearInterval(countdownTimer);
+        cdDays.textContent = cdHours.textContent = cdMinutes.textContent = cdSeconds.textContent = '00';
+        nextMatchLabel.textContent = 'Em andamento';
+        return;
+      }
+      var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      var mi = Math.floor((diff / (1000 * 60)) % 60);
+      var s = Math.floor((diff / 1000) % 60);
+      cdDays.textContent = String(d).padStart(2, '0');
+      cdHours.textContent = String(h).padStart(2, '0');
+      cdMinutes.textContent = String(mi).padStart(2, '0');
+      cdSeconds.textContent = String(s).padStart(2, '0');
+    }
+
+    updateCountdown();
+    countdownTimer = setInterval(updateCountdown, 1000);
+  }
+})();
+</script>
 </body>
 </html>

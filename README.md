@@ -36,8 +36,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 Projeto UEFA Nations League26-27 Eurocopa-28
 
 - [Acesse o projeto finalizado, online](https://github.com/williamsramos/uefanations-league2627eurocopa28)
-- [Acesse o site do projeto finalizado, online](https://williamsramos.github.io/)
-- [Acesse o site do projeto finalizado, online](https://.vercel.app)
+- [Acesse o site do projeto finalizado, online](https://williamsramos.github.io/uefanations-league2627eurocopa28/)
+- [Acesse o site do projeto finalizado, online](https://uefanations-league2627eurocopa28.vercel.app)
 
 ## :memo: Licença
 
