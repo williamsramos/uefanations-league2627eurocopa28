@@ -15,7 +15,7 @@ function safeOn(id, event, handler){
 /* ---------- Bandeiras (código ISO usado no flagcdn.com) ---------- */
 const FLAGS = {
   "França":"fr", "Itália":"it", "Bélgica":"be", "Turquia":"tr",
-  "Alemanha":"de", "Países Baixos":"nl", "Sérvia":"rs", "Grécia":"gr",
+  "Alemanha":"de", "Holanda":"nl", "Sérvia":"rs", "Grécia":"gr",
   "Espanha":"es", "Croácia":"hr", "Inglaterra":"gb-eng", "Chéquia":"cz",
   "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls",
   "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia do Norte":"mk",
@@ -24,7 +24,7 @@ const FLAGS = {
   "Polónia":"pl", "Bósnia e Herzegovina":"ba", "Roménia":"ro", "Suécia":"se",
   "Albânia":"al", "Finlândia":"fi", "Bielorrússia":"by", "San Marino":"sm",
   "Chipre":"cy", "Montenegro":"me", "Arménia":"am", "Letónia":"lv",
-  "Ilhas Faroé":"fo", "Cazaquistão":"kz", "Eslováquia":"sk", "República da Moldávia":"md",
+  "Ilhas Faroé":"fo", "Cazaquistão":"kz", "Eslováquia":"sk", "Moldávia":"md",
   "Islândia":"is", "Bulgária":"bg", "Estónia":"ee", "Luxemburgo":"lu",
   "Gibraltar":"gi", "Malta":"mt", "Andorra":"ad",
   "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li"

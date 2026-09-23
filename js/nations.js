@@ -8,7 +8,7 @@
 /* ---------- Grupos da Nations League 2026/2027 ---------- */
 const GROUPS = {
   A1: ["França","Itália","Bélgica","Turquia"],
-  A2: ["Alemanha","Países Baixos","Sérvia","Grécia"],
+  A2: ["Alemanha","Holanda","Sérvia","Grécia"],
   A3: ["Espanha","Croácia","Inglaterra","Chéquia"],
   A4: ["Portugal","Dinamarca","Noruega","País de Gales"],
 
@@ -19,7 +19,7 @@ const GROUPS = {
 
   C1: ["Albânia","Finlândia","Bielorrússia","San Marino"],
   C2: ["Chipre","Montenegro","Arménia","Letónia"],
-  C3: ["Ilhas Faroé","Cazaquistão","Eslováquia","República da Moldávia"],
+  C3: ["Ilhas Faroé","Cazaquistão","Eslováquia","Moldávia"],
   C4: ["Islândia","Bulgária","Estónia","Luxemburgo"],
 
   D1: ["Gibraltar","Malta","Andorra"],
