@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projetos UEFA - Nations League & Eurocopa</title>
+  <link rel="stylesheet" href="css/nations.css">
+  <link rel="shortcut icon" href="img/logo_nations.png" type="image/x-icon">
+  <style>
+    .portal-container {
+      max-width: 950px;
+      margin: 2.5rem auto;
+      padding: 0 1.2rem;
+      text-align: center;
+    }
+    .portal-title {
+      font-size: 2.2rem;
+      margin-bottom: 0.4rem;
+    }
+    .portal-subtitle {
+      color: var(--text-muted, #94a3b8);
+      margin-bottom: 2rem;
+    }
+    
+    /* Widget de Destaque / Apresentação */
+    .portal-hero-banner {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .hero-stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color, #38bdf8);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted, #94a3b8);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Grid de Cards */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.5s ease-out;
+    }
+    .portal-card {
+      position: relative;
+      background: var(--bg-card, #1e293b);
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+      border-radius: 16px;
+      padding: 2.2rem 1.5rem 1.8rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .portal-card:hover {
+      transform: translateY(-6px);
+    }
+    .portal-card.nations:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 12px 25px rgba(56, 189, 248, 0.2);
+    }
+    .portal-card.euro:hover {
+      border-color: #34d399;
+      box-shadow: 0 12px 25px rgba(52, 211, 153, 0.2);
+    }
+    .portal-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .portal-badge.active-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .portal-badge.upcoming-badge {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+    .portal-card img {
+      height: 90px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+    .portal-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .portal-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted, #94a3b8);
+      line-height: 1.45;
+      margin-bottom: 1.5rem;
+    }
+    .portal-btn {
+      margin-top: auto;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      background: var(--primary-color, #2563eb);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Animação */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <button id="themeToggle" class="theme-toggle" title="Alternar tema claro/escuro">🌙</button>
+  <h1>Projetos <span>UEFA</span></h1>
+</header>
+
+<main class="portal-container">
+  <h2 class="portal-title">Central de Torneios</h2>
+  <p class="portal-subtitle">Escolha a competição para ver tabelas, jogos e classificações</p>
+
+  <!-- Banner com Estatísticas Rápidas -->
+  <div class="portal-hero-banner">
+    <div class="hero-stat-item">
+      <span class="hero-stat-value">54</span>
+      <span class="hero-stat-label">Seleções Ativas</span>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-value">2</span>
+      <span class="hero-stat-label">Projetos Integ.</span>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-value">2026/2028</span>
+      <span class="hero-stat-label">Temporadas</span>
+    </div>
+  </div>
+
+  <!-- Cards de Seleção -->
+  <div class="portal-grid">
+    <!-- Card Nations League -->
+    <a href="nations.html" class="portal-card nations" aria-label="Acessar UEFA Nations League">
+      <span class="portal-badge active-badge">Edição 26/27</span>
+      <img src="img/logo_nations.png" alt="Logo Nations League" onerror="this.style.display='none'">
+      <h2>UEFA Nations League</h2>
+      <p>Classificação das Ligas A, B, C e D, tabelas de jogos, Final Four e galeira de campeões.</p>
+      <span class="portal-btn">Acessar Nations</span>
+    </a>
+
+    <!-- Card Eurocopa -->
+    <a href="euro.html" class="portal-card euro" aria-label="Acessar Eurocopa 2028">
+      <span class="portal-badge upcoming-badge">Sedes 2028</span>
+      <img src="img/logo_euro_2028.png" alt="Logo Eurocopa 2028" onerror="this.style.display='none'">
+      <h2>Eurocopa 2028</h2>
+      <p>Fase de apuramento, sedes oficiais (Reino Unido e Irlanda) e histórico do torneio.</p>
+      <span class="portal-btn">Acessar Eurocopa</span>
+    </a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>Desenvolvido por <strong>William Ramos</strong> &bull; Projetos UEFA</p>
+</footer>
+
+<script src="js/common.js"></script>
+</body>
+</html>
