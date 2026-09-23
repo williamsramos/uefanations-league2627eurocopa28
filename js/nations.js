@@ -19,7 +19,7 @@ const GROUPS = {
 
   C1: ["Albânia","Finlândia","Bielorrússia","San Marino"],
   C2: ["Chipre","Montenegro","Arménia","Letónia"],
-  C3: ["Ilhas Faroé","Cazaquistão","Eslováquia","Moldávia"],
+  C3: ["Ilhas Faroé","Cazaquistao","Eslováquia","Moldávia"],
   C4: ["Islândia","Bulgária","Estónia","Luxemburgo"],
 
   D1: ["Gibraltar","Malta","Andorra"],

@@ -17,21 +17,22 @@ const FLAGS = {
   "França":"fr", "Itália":"it", "Bélgica":"be", "Turquia":"tr",
   "Alemanha":"de", "Holanda":"nl", "Sérvia":"rs", "Grécia":"gr",
   "Espanha":"es", "Croácia":"hr", "Inglaterra":"gb-eng", "Chéquia":"cz",
-  "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls",
+  "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls", "P. Gales":"gb-wls",
   "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia":"mk",
   "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge", "Irl. do Norte":"gb-nir",
   "Israel":"il", "Áustria":"at", "Irlanda":"ie", "Kosovo":"xk",
-  "Polónia":"pl", "Bósnia e Herz.":"ba", "Roménia":"ro", "Suécia":"se",
+  "Polónia":"pl", "Bósnia e Herz.":"ba", "Bósnia e Herzegovina":"ba" , "Roménia":"ro", "Suécia":"se",
   "Albânia":"al", "Finlândia":"fi", "Bielorrússia":"by", "San Marino":"sm",
   "Chipre":"cy", "Montenegro":"me", "Arménia":"am", "Letónia":"lv",
-  "Ilhas Faroé":"fo", "Cazaquistão":"kz", "Eslováquia":"sk", "Moldávia":"md",
-  "Islândia":"is", "Bulgária":"bg", "Estónia":"ee", "Luxemburgo":"lu",
+  "Ilhas Faroé":"fo", "Cazaq.":"kz","Cazaquistao":"kz", "Eslováquia":"sk", "Moldávia":"md",
+  "Islândia":"is", "Bulgária":"bg", "Estónia":"ee", "Luxemburgo":"lu", "Luxem.":"lu",
   "Gibraltar":"gi", "Malta":"mt", "Andorra":"ad",
-  "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li"
+  "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li" , "Liecht.":"li"
 };
 
 // Países Baixos - Holanda/ República da Moldávia - Moldávia/ República da Irlanda - Irlanda / Macedónia do Norte - Macedónia
 //Bósnia e Herzegovina - Bósnia e Herz./ Irlanda do Norte - Irl. do Norte
+//Liechtenstein - Liecht./ País de Gales - P. Gales/ Cazaquistão - Cazq. / Luxemburgo - Luxem.
 
 function flagUrl(team){
   const code = FLAGS[team];

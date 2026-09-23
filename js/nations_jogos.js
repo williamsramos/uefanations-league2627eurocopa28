@@ -15,10 +15,10 @@ const FIXTURES = [
         {grupo:"A2", casa:"Holanda", fora:"Alemanha", hora: "15:45"},
         {grupo:"A2", casa:"Sérvia", fora:"Grécia" , hora: "15:45" },
         {grupo:"A4", casa:"Noruega", fora:"Dinamarca" , hora: "15:45"},
-        {grupo:"A4", casa:"Portugal", fora:"País de Gales" , hora: "15:45"},
+        {grupo:"A4", casa:"Portugal", fora:"P. Gales" , hora: "15:45"},
         {grupo:"B3", casa:"Áustria", fora:"Israel" , hora: "15:45"},
         {grupo:"B3", casa:"Kosovo", fora:"Irlanda" , hora: "15:45"},
-        {grupo:"D2", casa:"Liechtenstein", fora:"Lituânia" , hora: "15:45"}
+        {grupo:"D2", casa:"Liecht.", fora:"Lituânia" , hora: "15:45"}
       ]},
       { data:"Sexta-feira, 25 de Setembro", jogos:[
         {grupo:"B2", casa:"Geórgia", fora:"Irl. do Norte", hora:"13:00"},
@@ -35,9 +35,9 @@ const FIXTURES = [
         {grupo:"B1", casa:"Macedónia", fora:"Suíça" , hora: "15:45"},
         {grupo:"C1", casa:"San Marino", fora:"Finlândia", hora:"13:00"},
         {grupo:"C1", casa:"Albânia", fora:"Bielorrússia" , hora: "15:45"},
-        {grupo:"C3", casa:"Ilhas Faroé", fora:"Cazaquistão", hora:"13:00"},
+        {grupo:"C3", casa:"Ilhas Faroé", fora:"Cazaq.", hora:"13:00"},
         {grupo:"C3", casa:"Eslováquia", fora:"Moldávia" , hora: "15:45"},
-        {grupo:"C4", casa:"Bulgária", fora:"Luxemburgo", hora:"13:00"},
+        {grupo:"C4", casa:"Bulgária", fora:"Luxem.", hora:"13:00"},
         {grupo:"C4", casa:"Islândia", fora:"Estónia", hora:"15:45"},
         {grupo:"A3", casa:"Chéquia", fora:"Croácia" , hora: "15:45"},
         {grupo:"A3", casa:"Inglaterra", fora:"Espanha" , hora: "15:45"}
@@ -51,7 +51,7 @@ const FIXTURES = [
         {grupo:"D2", casa:"Lituânia", fora:"Azerbaijão", hora:"10:00"},
         {grupo:"B3", casa:"Áustria", fora:"Kosovo", hora:"13:00"},
         {grupo:"B3", casa:"Israel", fora:"Irlanda" , hora: "15:45"},
-        {grupo:"A4", casa:"Dinamarca", fora:"País de Gales", hora:"13:00"},
+        {grupo:"A4", casa:"Dinamarca", fora:"P. Gales", hora:"13:00"},
         {grupo:"A4", casa:"Noruega", fora:"Portugal" , hora: "15:45"},
         {grupo:"A2", casa:"Sérvia", fora:"Holanda", hora:"13:00"},
         {grupo:"A2", casa:"Alemanha", fora:"Grécia" , hora: "15:45"},
@@ -70,7 +70,7 @@ const FIXTURES = [
       ]},
       { data:"Terça-feira, 29 de Setembro", jogos:[
         {grupo:"C3", casa:"Moldávia", fora:"Ilhas Faroé", hora:"13:00"},
-        {grupo:"C3", casa:"Eslováquia", fora:"Cazaquistão" , hora: "15:45"},
+        {grupo:"C3", casa:"Eslováquia", fora:"Cazaq." , hora: "15:45"},
         {grupo:"C1", casa:"Finlândia", fora:"Bielorrússia", hora:"13:00"},
         {grupo:"C1", casa:"San Marino", fora:"Albânia", hora: "15:45"},
         {grupo:"B1", casa:"Escócia", fora:"Suíça" , hora: "15:45"},
@@ -78,7 +78,7 @@ const FIXTURES = [
         {grupo:"A3", casa:"Chéquia", fora:"Inglaterra" , hora: "15:45"},
         {grupo:"A3", casa:"Espanha", fora:"Croácia" , hora: "15:45"},
         {grupo:"C4", casa:"Bulgária", fora:"Estónia" , hora: "15:45"},
-        {grupo:"C4", casa:"Luxemburgo", fora:"Islândia" , hora: "15:45"}
+        {grupo:"C4", casa:"Luxem.", fora:"Islândia" , hora: "15:45"}
       ]}
     ]
   },
@@ -86,17 +86,17 @@ const FIXTURES = [
     jornada: 3,
     dias: [
       { data:"Quinta-feira, 1 de Outubro", jogos:[
-        {grupo:"D2", casa:"Azerbaijão", fora:"Liechtenstein", hora:"13:00"},
+        {grupo:"D2", casa:"Azerbaijão", fora:"Liecht.", hora:"13:00"},
         {grupo:"B3", casa:"Israel", fora:"Kosovo" , hora: "15:45"},
         {grupo:"B3", casa:"Irlanda", fora:"Áustria"  , hora: "15:45"},
         {grupo:"A4", casa:"Dinamarca", fora:"Portugal" , hora: "15:45"},
-        {grupo:"A4", casa:"País de Gales", fora:"Noruega" , hora: "15:45"},
+        {grupo:"A4", casa:"P. Gales", fora:"Noruega" , hora: "15:45"},
         {grupo:"A2", casa:"Alemanha", fora:"Sérvia" , hora: "15:45"},
         {grupo:"A2", casa:"Grécia", fora:"Holanda" , hora: "15:45"},
         {grupo:"D1", casa:"Malta", fora:"Gibraltar" , hora: "15:45"}
       ]},
       { data:"Sexta-feira, 2 de Outubro", jogos:[
-        {grupo:"C3", casa:"Cazaquistão", fora:"Moldávia", hora:"11:00"},
+        {grupo:"C3", casa:"Cazaq.", fora:"Moldávia", hora:"11:00"},
         {grupo:"C3", casa:"Ilhas Faroé", fora:"Eslováquia" , hora: "15:45"},
         {grupo:"C2", casa:"Chipre", fora:"Arménia", hora:"17:00"},
         {grupo:"C2", casa:"Letónia", fora:"Montenegro", hora:"17:00"},
@@ -112,7 +112,7 @@ const FIXTURES = [
         {grupo:"C1", casa:"Bielorrússia", fora:"San Marino", hora:"13:00"},
         {grupo:"A3", casa:"Croácia", fora:"Inglaterra", hora:"13:00"},
         {grupo:"A3", casa:"Espanha", fora:"Chéquia" , hora: "15:45"},
-        {grupo:"C4", casa:"Estónia", fora:"Luxemburgo", hora:"13:00"},
+        {grupo:"C4", casa:"Estónia", fora:"Luxem.", hora:"13:00"},
         {grupo:"C4", casa:"Islândia", fora:"Bulgária", hora:"13:00"},
         {grupo:"B1", casa:"Macedónia", fora:"Escócia" , hora: "15:45"},
         {grupo:"B1", casa:"Suíça", fora:"Eslovénia" , hora: "15:45"}
@@ -128,7 +128,7 @@ const FIXTURES = [
         {grupo:"B3", casa:"Irlanda", fora:"Israel" , hora: "15:45"},
         {grupo:"D1", casa:"Malta", fora:"Andorra", hora:"13:00"},
         {grupo:"A4", casa:"Portugal", fora:"Noruega" , hora: "15:45"},
-        {grupo:"A4", casa:"País de Gales", fora:"Dinamarca" , hora: "15:45"},
+        {grupo:"A4", casa:"P. Gales", fora:"Dinamarca" , hora: "15:45"},
         {grupo:"A2", casa:"Grécia", fora:"Alemanha" , hora: "15:45"},
         {grupo:"A2", casa:"Holanda", fora:"Sérvia" , hora: "15:45"}
         
@@ -144,14 +144,14 @@ const FIXTURES = [
         {grupo:"A1", casa:"Itália", fora:"Turquia" , hora: "15:45"}
       ]},
       { data:"Terça-feira, 6 de Outubro", jogos:[
-        {grupo:"C3", casa:"Cazaquistão", fora:"Ilhas Faroé", hora:"11:00"},
+        {grupo:"C3", casa:"Cazaq.", fora:"Ilhas Faroé", hora:"11:00"},
         {grupo:"C3", casa:"Moldávia", fora:"Eslováquia" , hora: "15:45"},
         {grupo:"B1", casa:"Escócia", fora:"Eslovénia" , hora: "15:45"},
         {grupo:"B1", casa:"Suíça", fora:"Macedónia" , hora: "15:45"},
         {grupo:"A3", casa:"Croácia", fora:"Espanha" , hora: "15:45"},
         {grupo:"A3", casa:"Inglaterra", fora:"Chéquia" , hora: "15:45"},
         {grupo:"C4", casa:"Estónia", fora:"Islândia" , hora: "15:45"},
-        {grupo:"C4", casa:"Luxemburgo", fora:"Bulgária" , hora: "15:45"},
+        {grupo:"C4", casa:"Luxem.", fora:"Bulgária" , hora: "15:45"},
         {grupo:"C1", casa:"Albânia", fora:"San Marino" , hora: "15:45"},
         {grupo:"C1", casa:"Bielorrússia", fora:"Finlândia" , hora: "15:45"}
       ]}
@@ -171,15 +171,15 @@ const FIXTURES = [
         {grupo:"C2", casa:"Montenegro", fora:"Letónia" , hora: "16:45"}
       ]},
       { data:"Sexta-feira, 13 de Novembro", jogos:[
-        {grupo:"C3", casa:"Moldávia", fora:"Cazaquistão", hora:"14:00"},
+        {grupo:"C3", casa:"Moldávia", fora:"Cazaq.", hora:"14:00"},
         {grupo:"C3", casa:"Eslováquia", fora:"Ilhas Faroé", hora: "16:45"},
         {grupo:"B1", casa:"Escócia", fora:"Macedónia" , hora: "16:45"},
         {grupo:"B1", casa:"Eslovénia", fora:"Suíça" , hora: "16:45"},
-        {grupo:"D2", casa:"Liechtenstein", fora:"Azerbaijão" , hora: "16:45"},
+        {grupo:"D2", casa:"Liecht.", fora:"Azerbaijão" , hora: "16:45"},
         {grupo:"A2", casa:"Holanda", fora:"Grécia" , hora: "16:45"},
         {grupo:"A2", casa:"Sérvia", fora:"Alemanha" , hora: "16:45"},
         {grupo:"C4", casa:"Bulgária", fora:"Islândia" , hora: "16:45"},
-        {grupo:"C4", casa:"Luxemburgo", fora:"Estónia" , hora: "16:45"},
+        {grupo:"C4", casa:"Luxem.", fora:"Estónia" , hora: "16:45"},
         {grupo:"D1", casa:"Andorra", fora:"Gibraltar" , hora: "16:45"},
         
       ]},
@@ -188,7 +188,7 @@ const FIXTURES = [
         {grupo:"B3", casa:"Áustria", fora:"Irlanda", hora: "16:45"},
         {grupo:"B2", casa:"Irl. do Norte", fora:"Ucrânia", hora: "16:45"},
         {grupo:"B2", casa:"Geórgia", fora:"Hungria", hora:"14:00"},
-        {grupo:"A4", casa:"Noruega", fora:"País de Gales", hora:"14:00"},
+        {grupo:"A4", casa:"Noruega", fora:"P. Gales", hora:"14:00"},
         {grupo:"A4", casa:"Portugal", fora:"Dinamarca", hora: "16:45"},
         {grupo:"B4", casa:"Roménia", fora:"Polónia", hora: "16:45"},
         {grupo:"B4", casa:"Suécia", fora:"Bósnia e Herz.", hora: "16:45"}
@@ -210,10 +210,10 @@ const FIXTURES = [
       ]},
       { data:"Segunda-feira, 16 de Novembro", jogos:[
         {grupo:"C3", casa:"Ilhas Faroé", fora:"Moldávia", hora:"12:00"},
-        {grupo:"C3", casa:"Cazaquistão", fora:"Eslováquia", hora:"12:00"},
-        {grupo:"D2", casa:"Lituânia", fora:"Liechtenstein", hora:"14:00"},
+        {grupo:"C3", casa:"Cazaq.", fora:"Eslováquia", hora:"12:00"},
+        {grupo:"D2", casa:"Lituânia", fora:"Liecht.", hora:"14:00"},
         {grupo:"C4", casa:"Estónia", fora:"Bulgária", hora:"14:00"},
-        {grupo:"C4", casa:"Islândia", fora:"Luxemburgo", hora:"14:00"},
+        {grupo:"C4", casa:"Islândia", fora:"Luxem.", hora:"14:00"},
         {grupo:"B1", casa:"Macedónia", fora:"Eslovénia" , hora:"16:45"},
         {grupo:"B1", casa:"Suíça", fora:"Escócia" , hora:"16:45"},
         {grupo:"A2", casa:"Alemanha", fora:"Holanda" , hora:"16:45"},
@@ -222,7 +222,7 @@ const FIXTURES = [
       ]},
       { data:"Terça-feira, 17 de Novembro", jogos:[
         {grupo:"A4", casa:"Dinamarca", fora:"Noruega" , hora:"16:45"},
-        {grupo:"A4", casa:"País de Gales", fora:"Portugal" , hora:"16:45"},
+        {grupo:"A4", casa:"P. Gales", fora:"Portugal" , hora:"16:45"},
         {grupo:"B2", casa:"Hungria", fora:"Irl. do Norte" , hora:"16:45"},
         {grupo:"B2", casa:"Ucrânia", fora:"Geórgia" , hora:"16:45"},
         {grupo:"B3", casa:"Israel", fora:"Áustria" , hora:"16:45"},
