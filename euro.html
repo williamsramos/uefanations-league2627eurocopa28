@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eurocopa 2028</title>
+<link rel="stylesheet" href="css/nations.css">
+<link rel="shortcut icon" href="img/logo_euro_2028.png" type="image/x-icon">
+</head>
+<body>
+
+<header class="site-header">
+  <button id="themeToggle" class="theme-toggle" title="Alternar tema claro/escuro">🌙</button>
+
+  <img src="img/logo_euro_2028.png" alt="Logo Eurocopa 2028" class="logo-nations" onerror="this.style.display='none'">
+  <h1>Eurocopa <span>2028</span></h1>
+
+  <nav class="main-tabs" id="mainTabs">
+    <a href="nations.html" class="main-tab-btn">Nations League</a>
+    <a href="euro.html" class="main-tab-btn active">Eurocopa</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== EUROCOPA ===================== -->
+  <section id="euro" class="main-section active">
+
+    <nav class="sub-tabs" id="euroSubTabs">
+      <button class="sub-tab-btn active" data-sub="euroClassificacao">Classificação</button>
+      <button class="sub-tab-btn" data-sub="euroJogos">Jogos</button>
+      <button class="sub-tab-btn" data-sub="euroCampeoes">Campeões</button>
+    </nav>
+
+    <div id="euroClassificacao" class="sub-section active">
+      <div class="placeholder-box">
+        <h2>Eurocopa</h2>
+        <p>Os grupos, seleções e calendário da fase de apuramento / fase final da Eurocopa ainda não foram
+        fornecidos, somente em 2027. Sedes Reino Unido e Irlanda.</p>
+      </div>
+    </div>
+
+    <div id="euroJogos" class="sub-section">
+      <div class="placeholder-box">
+        <h2>Jogos da Eurocopa</h2>
+        <p>Aguardando o calendário oficial dos jogos para gerar aqui os campos de placar.</p>
+      </div>
+    </div>
+
+    <div id="euroCampeoes" class="sub-section">
+      <h2>Campeões da Eurocopa</h2>
+      <div id="euroChampionsHistory" class="champions-grid"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <img src="img/logo_euro_2028.png" alt="Logo Eurocopa 2028" class="footer-logo" onerror="this.style.display='none'">
+  <p>Desenvolvido por <strong>William Ramos</strong> durante a <strong>Eurocopa</strong> <span>28</span></p>
+</footer>
+
+<button id="voltarTopoBtn" class="voltar-topo" title="Voltar ao topo" aria-label="Voltar ao topo">
+  <span class="voltar-topo-seta">&lt;</span>
+  <span class="voltar-topo-texto">Topo</span>
+</button>
+
+<script src="js/common.js"></script>
+<script src="js/euro.js"></script>
+</body>
+</html>

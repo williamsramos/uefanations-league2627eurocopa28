@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UEFA Nations League 26/27</title>
+<link rel="stylesheet" href="css/nations.css">
+<link rel="shortcut icon" href="img/logo_nations.png" type="image/x-icon">
+</head>
+<body>
+
+<header class="site-header">
+  <button id="themeToggle" class="theme-toggle" title="Alternar tema claro/escuro">🌙</button>
+
+  <img src="img/logo_nations.png" alt="Logo Nations League" class="logo-nations" onerror="this.style.display='none'">
+  <h1>UEFA Nations League <span>26/27</span></h1>
+
+  <div class="search-box">
+    <input type="text" id="buscaSelecao" placeholder="🔍 Buscar seleção (ex: Portugal)...">
+    <button id="limparBuscaBtn" class="limpar-busca" title="Limpar busca">✕</button>
+  </div>
+
+  <nav class="main-tabs" id="mainTabs">
+    <a href="nations.html" class="main-tab-btn active">Nations League</a>
+    <a href="euro.html" class="main-tab-btn">Eurocopa</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== NATIONS LEAGUE ===================== -->
+  <section id="nations" class="main-section active">
+
+    <nav class="sub-tabs" id="nationsSubTabs">
+      <button class="sub-tab-btn active" data-sub="classificacao">Classificação</button>
+      <button class="sub-tab-btn" data-sub="jogos">Jogos</button>
+      <button class="sub-tab-btn" data-sub="final4">Final Four</button>
+      <button class="sub-tab-btn" data-sub="campeoes">Campeões</button>
+    </nav>
+
+    <!-- ------- CLASSIFICAÇÃO ------- -->
+    <div id="classificacao" class="sub-section active">
+
+      <nav class="liga-tabs" id="ligaTabs">
+        <button class="liga-btn active" data-liga="Todos">Todos</button>
+        <button class="liga-btn" data-liga="A">Liga A</button>
+        <button class="liga-btn" data-liga="B">Liga B</button>
+        <button class="liga-btn" data-liga="C">Liga C</button>
+        <button class="liga-btn" data-liga="D">Liga D</button>
+      </nav>
+
+      <nav class="grupo-tabs" id="grupoTabs"></nav>
+
+      <div class="modo-compacto-wrap">
+        <button id="modoCompactoBtn" class="modo-compacto-btn" title="Alternar tabela compacta">
+          📱 Modo compacto
+        </button>
+      </div>
+
+      <div id="standingsContainer" class="standings-container"></div>
+    </div>
+
+    <!-- ------- JOGOS ------- -->
+    <div id="jogos" class="sub-section">
+      <div id="progressoJogos" class="progresso-jogos"></div>
+      <nav class="jornada-tabs" id="jornadaTabs"></nav>
+      <div id="buscaJogosAviso" class="busca-aviso" style="display:none"></div>
+      <div id="jogosContainer" class="jogos-container"></div>
+    </div>
+
+    <!-- ------- FINAL FOUR ------- -->
+    <div id="final4" class="sub-section">
+      <h2>Final Four — Liga A</h2>
+      <img src="img/trofeu_nations.png" alt="Troféu da UEFA Nations League" class="trofeu-final4" onerror="this.style.display='none'">
+      <p class="hint centro">Os vencedores dos 4 grupos da Liga A (A1 a A4) disputam a Final Four em jogo
+      único: meias-finais, jogo de 3º lugar e final. Os confrontos abaixo já vêm com os atuais líderes de
+      cada grupo — ajusta os emparelhamentos e os placares como quiseres.</p>
+
+      <div id="final4Semifinalistas" class="final4-teams"></div>
+      <div id="final4Bracket" class="final4-bracket"></div>
+    </div>
+
+    <!-- ------- CAMPEÕES ------- -->
+    <div id="campeoes" class="sub-section">
+      <h2>Campeões da Nations League</h2>
+      <div id="championsHistory" class="champions-grid"></div>
+      <div class="champions-form">
+        <h3>Edição 2026/2027</h3>
+        <p class="hint">Preencha o pódio desta edição assim que a Final Four for disputada.</p>
+        <div class="form-row">
+          <label for="campeaoSelect">🥇 Campeão</label>
+          <select id="campeaoSelect"></select>
+        </div>
+        <div class="form-row">
+          <label for="viceSelect">🥈 2º lugar</label>
+          <select id="viceSelect"></select>
+        </div>
+        <div class="form-row">
+          <label for="terceiroSelect">🥉 3º lugar</label>
+          <select id="terceiroSelect"></select>
+        </div>
+        <button id="salvarPodioBtn">Guardar pódio 2026/2027</button>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <img src="img/logo_nations.png" alt="Logo Nations League" class="footer-logo" onerror="this.style.display='none'">
+  <p>Desenvolvido por <strong>William Ramos</strong> durante a <strong>UEFA Nations League</strong> <span>26/27</span></p>
+</footer>
+
+<button id="voltarTopoBtn" class="voltar-topo" title="Voltar ao topo" aria-label="Voltar ao topo">
+  <span class="voltar-topo-seta">&lt;</span>
+  <span class="voltar-topo-texto">Topo</span>
+</button>
+
+<script src="js/common.js"></script>
+<script src="js/nations.js"></script>
+<script src="js/nations_jogos.js"></script>
+<script src="js/nations_final4.js"></script>
+</body>
+</html>
