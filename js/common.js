@@ -19,9 +19,9 @@ const FLAGS = {
   "Espanha":"es", "Croácia":"hr", "Inglaterra":"gb-eng", "Chéquia":"cz",
   "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls", "P. Gales":"gb-wls",
   "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia":"mk",
-  "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge", "Irl. do Norte":"gb-nir",
+  "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge", "Irl. do Norte":"gb-nir", "Irlanda do Norte":"gb-nir",
   "Israel":"il", "Áustria":"at", "Irlanda":"ie", "Kosovo":"xk",
-  "Polónia":"pl", "Bósnia e Herz.":"ba", "Bósnia e Herzegovina":"ba" , "Roménia":"ro", "Suécia":"se",
+  "Polónia":"pl", "Bósnia":"ba", "Bósnia e Herzegovina":"ba" , "Roménia":"ro", "Suécia":"se",
   "Albânia":"al", "Finlândia":"fi", "Bielorrússia":"by", "San Marino":"sm",
   "Chipre":"cy", "Montenegro":"me", "Arménia":"am", "Letónia":"lv",
   "Ilhas Faroé":"fo", "Cazaq.":"kz","Cazaquistao":"kz", "Eslováquia":"sk", "Moldávia":"md",
@@ -31,7 +31,7 @@ const FLAGS = {
 };
 
 // Países Baixos - Holanda/ República da Moldávia - Moldávia/ República da Irlanda - Irlanda / Macedónia do Norte - Macedónia
-//Bósnia e Herzegovina - Bósnia e Herz./ Irlanda do Norte - Irl. do Norte
+//Bósnia e Herzegovina - Bósnia/ Irlanda do Norte - Irl. do Norte
 //Liechtenstein - Liecht./ País de Gales - P. Gales/ Cazaquistão - Cazq. / Luxemburgo - Luxem.
 
 function flagUrl(team){

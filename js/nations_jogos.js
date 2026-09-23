@@ -26,7 +26,7 @@ const FIXTURES = [
         {grupo:"A1", casa:"Itália", fora:"Bélgica" , hora: "15:45"},
         {grupo:"A1", casa:"Turquia", fora:"França" , hora: "15:45"},
         {grupo:"B2", casa:"Hungria", fora:"Ucrânia", hora: "15:45"},
-        {grupo:"B4", casa:"Polónia", fora:"Bósnia e Herz." , hora: "15:45"},
+        {grupo:"B4", casa:"Polónia", fora:"Bósnia" , hora: "15:45"},
         {grupo:"B4", casa:"Suécia", fora:"Roménia" , hora: "15:45"},
         {grupo:"C2", casa:"Montenegro", fora:"Chipre" , hora: "15:45"}
       ]},
@@ -62,7 +62,7 @@ const FIXTURES = [
         {grupo:"B2", casa:"Irl. do Norte", fora:"Hungria" , hora: "15:45"},
         {grupo:"C2", casa:"Arménia", fora:"Montenegro", hora:"13:00"},
         {grupo:"C2", casa:"Letónia", fora:"Chipre", hora:"13:00"},
-        {grupo:"B4", casa:"Roménia", fora:"Bósnia e Herz." , hora: "15:45"},
+        {grupo:"B4", casa:"Roménia", fora:"Bósnia" , hora: "15:45"},
         {grupo:"B4", casa:"Suécia", fora:"Polónia" , hora: "15:45"},
         {grupo:"A1", casa:"Bélgica", fora:"França" , hora: "15:45"},
         {grupo:"A1", casa:"Turquia", fora:"Itália" , hora: "15:45"}
@@ -100,7 +100,7 @@ const FIXTURES = [
         {grupo:"C3", casa:"Ilhas Faroé", fora:"Eslováquia" , hora: "15:45"},
         {grupo:"C2", casa:"Chipre", fora:"Arménia", hora:"17:00"},
         {grupo:"C2", casa:"Letónia", fora:"Montenegro", hora:"17:00"},
-        {grupo:"B4", casa:"Bósnia e Herz.", fora:"Suécia" , hora: "15:45"},
+        {grupo:"B4", casa:"Bósnia", fora:"Suécia" , hora: "15:45"},
         {grupo:"B4", casa:"Polónia", fora:"Roménia" , hora: "15:45"},
         {grupo:"B2", casa:"Hungria", fora:"Geórgia" , hora: "15:45"},
         {grupo:"B2", casa:"Ucrânia", fora:"Irl. do Norte" , hora: "15:45"},
@@ -136,7 +136,7 @@ const FIXTURES = [
       { data:"Segunda-feira, 5 de Outubro", jogos:[
         {grupo:"C2", casa:"Chipre", fora:"Letónia", hora:"13:00"},
         {grupo:"C2", casa:"Montenegro", fora:"Arménia" , hora: "15:45"},
-        {grupo:"B4", casa:"Bósnia e Herz.", fora:"Polónia" , hora: "15:45"},
+        {grupo:"B4", casa:"Bósnia", fora:"Polónia" , hora: "15:45"},
         {grupo:"B4", casa:"Roménia", fora:"Suécia" , hora: "15:45"},
         {grupo:"B2", casa:"Irl. do Norte", fora:"Geórgia" , hora: "15:45"},
         {grupo:"B2", casa:"Ucrânia", fora:"Hungria" , hora: "15:45"},
@@ -191,7 +191,7 @@ const FIXTURES = [
         {grupo:"A4", casa:"Noruega", fora:"P. Gales", hora:"14:00"},
         {grupo:"A4", casa:"Portugal", fora:"Dinamarca", hora: "16:45"},
         {grupo:"B4", casa:"Roménia", fora:"Polónia", hora: "16:45"},
-        {grupo:"B4", casa:"Suécia", fora:"Bósnia e Herz.", hora: "16:45"}
+        {grupo:"B4", casa:"Suécia", fora:"Bósnia", hora: "16:45"}
       ]}
     ]
   },
@@ -227,7 +227,7 @@ const FIXTURES = [
         {grupo:"B2", casa:"Ucrânia", fora:"Geórgia" , hora:"16:45"},
         {grupo:"B3", casa:"Israel", fora:"Áustria" , hora:"16:45"},
         {grupo:"B3", casa:"Irlanda", fora:"Kosovo" , hora:"16:45"},
-        {grupo:"B4", casa:"Bósnia e Herz.", fora:"Roménia" , hora:"16:45"},
+        {grupo:"B4", casa:"Bósnia", fora:"Roménia" , hora:"16:45"},
         {grupo:"B4", casa:"Polónia", fora:"Suécia" , hora:"16:45"}
       ]}
     ]
