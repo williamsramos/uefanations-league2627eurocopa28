@@ -12,10 +12,10 @@ const GROUPS = {
   A3: ["Espanha","Croácia","Inglaterra","Chéquia"],
   A4: ["Portugal","Dinamarca","Noruega","País de Gales"],
 
-  B1: ["Escócia","Suíça","Eslovénia","Macedónia do Norte"],
-  B2: ["Hungria","Ucrânia","Geórgia","Irlanda do Norte"],
-  B3: ["Israel","Áustria","República da Irlanda","Kosovo"],
-  B4: ["Polónia","Bósnia e Herzegovina","Roménia","Suécia"],
+  B1: ["Escócia","Suíça","Eslovénia","Macedónia"],
+  B2: ["Hungria","Ucrânia","Geórgia","Irl. do Norte"],
+  B3: ["Israel","Áustria","Irlanda","Kosovo"],
+  B4: ["Polónia","Bósnia e Herz.","Roménia","Suécia"],
 
   C1: ["Albânia","Finlândia","Bielorrússia","San Marino"],
   C2: ["Chipre","Montenegro","Arménia","Letónia"],

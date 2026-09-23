@@ -18,10 +18,10 @@ const FLAGS = {
   "Alemanha":"de", "Holanda":"nl", "Sérvia":"rs", "Grécia":"gr",
   "Espanha":"es", "Croácia":"hr", "Inglaterra":"gb-eng", "Chéquia":"cz",
   "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls",
-  "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia do Norte":"mk",
-  "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge", "Irlanda do Norte":"gb-nir",
-  "Israel":"il", "Áustria":"at", "República da Irlanda":"ie", "Kosovo":"xk",
-  "Polónia":"pl", "Bósnia e Herzegovina":"ba", "Roménia":"ro", "Suécia":"se",
+  "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia":"mk",
+  "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge", "Irl. do Norte":"gb-nir",
+  "Israel":"il", "Áustria":"at", "Irlanda":"ie", "Kosovo":"xk",
+  "Polónia":"pl", "Bósnia e Herz.":"ba", "Roménia":"ro", "Suécia":"se",
   "Albânia":"al", "Finlândia":"fi", "Bielorrússia":"by", "San Marino":"sm",
   "Chipre":"cy", "Montenegro":"me", "Arménia":"am", "Letónia":"lv",
   "Ilhas Faroé":"fo", "Cazaquistão":"kz", "Eslováquia":"sk", "Moldávia":"md",
@@ -29,6 +29,9 @@ const FLAGS = {
   "Gibraltar":"gi", "Malta":"mt", "Andorra":"ad",
   "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li"
 };
+
+// Países Baixos - Holanda/ República da Moldávia - Moldávia/ República da Irlanda - Irlanda / Macedónia do Norte - Macedónia
+//Bósnia e Herzegovina - Bósnia e Herz./ Irlanda do Norte - Irl. do Norte
 
 function flagUrl(team){
   const code = FLAGS[team];
