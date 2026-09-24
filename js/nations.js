@@ -8,18 +8,18 @@
 /* ---------- Grupos da Nations League 2026/2027 ---------- */
 const GROUPS = {
   A1: ["França","Itália","Bélgica","Turquia"],
-  A2: ["Alemanha","Holanda","Sérvia","Grécia"],
+  A2: ["Alemanha","Países Baixos","Sérvia","Grécia"],
   A3: ["Espanha","Croácia","Inglaterra","Chéquia"],
   A4: ["Portugal","Dinamarca","Noruega","País de Gales"],
 
-  B1: ["Escócia","Suíça","Eslovénia","Macedónia"],
+  B1: ["Escócia","Suíça","Eslovénia","Macedónia do Norte"],
   B2: ["Hungria","Ucrânia","Geórgia","Irlanda do Norte"],
-  B3: ["Israel","Áustria","Irlanda","Kosovo"],
-  B4: ["Polónia","Bósnia e Herz.","Roménia","Suécia"],
+  B3: ["Israel","Áustria","República da Irlanda","Kosovo"],
+  B4: ["Polónia","Bósnia e Herzegovina","Roménia","Suécia"],
 
   C1: ["Albânia","Finlândia","Bielorrússia","San Marino"],
   C2: ["Chipre","Montenegro","Arménia","Letónia"],
-  C3: ["Ilhas Faroé","Cazaquistao","Eslováquia","Moldávia"],
+  C3: ["Ilhas Faroé","Cazaquistão","Eslováquia","República da Moldávia"],
   C4: ["Islândia","Bulgária","Estónia","Luxemburgo"],
 
   D1: ["Gibraltar","Malta","Andorra"],
@@ -238,7 +238,7 @@ function renderStandings(){
 
       html += `<tr class="${rowClass}">
         <td><span class="pos-badge">${i+1}</span></td>
-        <td class="team-cell">${flagImg(t.time)} ${t.time}${tag}</td>
+        <td class="team-cell">${flagImg(t.time)}<span class="team-name-wrap"><span class="team-name">${t.time}</span>${tag}</span></td>
         <td>${t.j}</td><td>${t.v}</td><td>${t.e}</td><td>${t.d}</td>
         <td>${t.gp}</td><td>${t.gc}</td><td>${t.sg}</td><td><strong>${t.pts}</strong></td>
       </tr>`;

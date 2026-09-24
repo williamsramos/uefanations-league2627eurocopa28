@@ -15,19 +15,19 @@ function safeOn(id, event, handler){
 /* ---------- Bandeiras (código ISO usado no flagcdn.com) ---------- */
 const FLAGS = {
   "França":"fr", "Itália":"it", "Bélgica":"be", "Turquia":"tr",
-  "Alemanha":"de", "Holanda":"nl", "Sérvia":"rs", "Grécia":"gr",
+  "Alemanha":"de", "Países Baixos":"nl", "Sérvia":"rs", "Grécia":"gr",
   "Espanha":"es", "Croácia":"hr", "Inglaterra":"gb-eng", "Chéquia":"cz",
-  "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls", "P. Gales":"gb-wls",
-  "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia":"mk",
-  "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge", "Irl. do Norte":"gb-nir", "Irlanda do Norte":"gb-nir",
-  "Israel":"il", "Áustria":"at", "Irlanda":"ie", "Kosovo":"xk",
-  "Polónia":"pl", "Bósnia":"ba", "Bósnia e Herzegovina":"ba" , "Roménia":"ro", "Suécia":"se",
+  "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls",
+  "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia do Norte":"mk",
+  "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge",  "Irlanda do Norte":"gb-nir",
+  "Israel":"il", "Áustria":"at", "República da Irlanda":"ie", "Kosovo":"xk",
+  "Polónia":"pl", "Bósnia e Herzegovina":"ba" , "Roménia":"ro", "Suécia":"se",
   "Albânia":"al", "Finlândia":"fi", "Bielorrússia":"by", "San Marino":"sm",
   "Chipre":"cy", "Montenegro":"me", "Arménia":"am", "Letónia":"lv",
-  "Ilhas Faroé":"fo", "Cazaq.":"kz","Cazaquistao":"kz", "Eslováquia":"sk", "Moldávia":"md",
-  "Islândia":"is", "Bulgária":"bg", "Estónia":"ee", "Luxemburgo":"lu", "Luxem.":"lu",
+  "Ilhas Faroé":"fo","Cazaquistão":"kz", "Eslováquia":"sk", "República da Moldávia":"md",
+  "Islândia":"is", "Bulgária":"bg", "Estónia":"ee", "Luxemburgo":"lu",
   "Gibraltar":"gi", "Malta":"mt", "Andorra":"ad",
-  "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li" , "Liecht.":"li"
+  "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li" ,
 };
 
 // Países Baixos - Holanda/ República da Moldávia - Moldávia/ República da Irlanda - Irlanda / Macedónia do Norte - Macedónia

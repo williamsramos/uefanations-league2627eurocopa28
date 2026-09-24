@@ -265,6 +265,11 @@ table.standings-table th, table.standings-table td{
   white-space:nowrap;
 }
 
+table.standings-table td.team-cell,
+table.standings-table td.team-cell .team-name{
+  white-space:normal; /* nome da seleção pode quebrar em vez de cortar */
+}
+
 table.standings-table th{
   color:var(--texto-suave);
   font-size:.72rem;
@@ -278,6 +283,16 @@ table.standings-table td.team-cell{
   align-items:center;
   gap:8px;
   font-weight:600;
+}
+
+.team-name-wrap{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0; /* permite ao filho encolher/quebrar em vez de estourar a linha */
+}
+.team-name{
+  min-width:0;
 }
 
 table.standings-table img.flag{
@@ -853,8 +868,10 @@ body.light-mode .f4-pen-row select{background:#fff;}
   /* Distribui o espaço entre os dois times igualmente */
   .match-row .team {
     flex: 1;
-    min-width: 0; /* Permite truncar o texto se o nome for longo */
-    font-size: .8rem;
+    min-width: 0;
+    /* Tamanho de fonte flexível: encolhe sozinho conforme a tela fica mais
+       estreita, em vez de depender só de truncar o texto */
+    font-size: clamp(.66rem, 3.6vw, .8rem);
     gap: 4px;
   }
 
@@ -870,10 +887,18 @@ body.light-mode .f4-pen-row select{background:#fff;}
     text-align: left;
   }
 
+  /* Nomes curtos ficam numa linha só; nomes longos (Macedónia do Norte,
+     República da Irlanda, Irlanda do Norte, Liechtenstein...) quebram em
+     até 2 linhas em vez de serem cortados com "..." */
   .match-row .team span {
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    line-height: 1.15;
+    word-break: break-word;
   }
 
   /* Garante tamanho fixo e alinhamento dos inputs de gol */
@@ -890,6 +915,27 @@ body.light-mode .f4-pen-row select{background:#fff;}
   }
 
   table.standings-table{font-size:.75rem;}
+
+  /* Classificação: nome da seleção quebra em até 2 linhas (em vez de
+     cortar) e a tag (Final Four / Sobe / Desce) vai para uma linha
+     abaixo, pra não disputar espaço horizontal com nomes compridos
+     como "Macedónia do Norte" ou "República da Irlanda" */
+  table.standings-table td.team-cell{
+    align-items: flex-start;
+  }
+  table.standings-table img.flag{
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .team-name-wrap{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  .team-name{
+    line-height: 1.2;
+  }
+
   .site-footer{flex-direction:column;gap:6px;}
   .theme-toggle{top:10px;right:10px;}
   .search-box{max-width:90%;}
