@@ -432,3 +432,43 @@ document.addEventListener("DOMContentLoaded", ()=>{
   renderJornadaTabs();
   renderJogos();
 });
+
+/* =======================================================================
+   SALVAR RESULTADOS (localStorage)
+   O preenchimento dos placares já fica em matchResults (memória) a cada
+   input — isto aqui só persiste esse objeto no navegador, para que ao
+   recarregar a página (nations.js) os resultados voltem a aparecer.
+   ======================================================================= */
+function salvarResultados(){
+  try{
+    localStorage.setItem(RESULTADOS_STORAGE_KEY, JSON.stringify(matchResults));
+    return true;
+  }catch(e){
+    console.warn("Não foi possível guardar os resultados:", e);
+    return false;
+  }
+}
+
+const salvarResultadosBtn = safeOn("salvarResultadosBtn", "click", ()=>{
+  const ok = salvarResultados();
+  const btn = document.getElementById("salvarResultadosBtn");
+  if(!btn) return;
+
+  const textoOriginal = "💾 Salvar resultados";
+  btn.disabled = true;
+  btn.classList.remove("guardado","erro");
+
+  if(ok){
+    btn.textContent = "✔ Guardado!";
+    btn.classList.add("guardado");
+  } else {
+    btn.textContent = "⚠ Erro ao guardar";
+    btn.classList.add("erro");
+  }
+
+  setTimeout(()=>{
+    btn.textContent = textoOriginal;
+    btn.classList.remove("guardado","erro");
+    btn.disabled = false;
+  }, 1800);
+});

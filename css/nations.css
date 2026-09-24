@@ -439,6 +439,49 @@ table.standings-table tbody tr.row-buscada{
   font-weight:600;
 }
 
+/* Barra que junta o progresso dos jogos com o botão de salvar */
+.jogos-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin:6px 0 4px;
+}
+.jogos-toolbar .progresso-jogos{
+  margin:0;
+}
+.salvar-resultados-btn{
+  background:var(--azul-painel);
+  color:var(--texto-suave);
+  border:1px solid var(--borda);
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:.82rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:color .2s ease, border-color .2s ease, background .2s ease;
+  white-space:nowrap;
+}
+.salvar-resultados-btn:hover{
+  color:var(--dourado);
+  border-color:var(--dourado);
+}
+.salvar-resultados-btn:disabled{
+  cursor:default;
+  opacity:.85;
+}
+.salvar-resultados-btn.guardado{
+  background:var(--verde);
+  color:#fff;
+  border-color:var(--verde);
+}
+.salvar-resultados-btn.erro{
+  background:var(--vermelho);
+  color:#fff;
+  border-color:var(--vermelho);
+}
+
 /* ===================== FINAL FOUR ===================== */
 .trofeu-final4{
   display:block;

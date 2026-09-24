@@ -49,6 +49,21 @@ let podio2027 = { campeao:"", vice:"", terceiro:"" };
 /* ---------- Resultados dos jogos (preenchido em nations_jogos.js) ---------- */
 const matchResults = {}; // chave -> {golsCasa, golsFora}
 
+/* Chave usada no localStorage para persistir os placares entre visitas */
+const RESULTADOS_STORAGE_KEY = "nationsLeagueResultados2627";
+
+/* Carrega os resultados guardados (se existirem) assim que este script
+   corre — ou seja, antes de qualquer renderStandings()/renderJogos()
+   acontecer, para a página já nascer com os placares certos. */
+(function carregarResultadosSalvos(){
+  try{
+    const salvo = localStorage.getItem(RESULTADOS_STORAGE_KEY);
+    if(salvo) Object.assign(matchResults, JSON.parse(salvo));
+  }catch(e){
+    console.warn("Não foi possível carregar os resultados salvos:", e);
+  }
+})();
+
 /* =======================================================================
    SUB-ABAS DESTA PÁGINA
    ======================================================================= */
