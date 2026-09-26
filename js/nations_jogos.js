@@ -38,7 +38,7 @@ const FIXTURES = [
         {grupo:"C3", casa:"Ilhas Faroé", fora:"Cazaquistão", hora:"13:00"},
         {grupo:"C3", casa:"Eslováquia", fora:"República da Moldávia" , hora: "15:45"},
         {grupo:"C4", casa:"Bulgária", fora:"Luxemburgo", hora:"13:00"},
-        {grupo:"C4", casa:"Islândia", fora:"Estónia", hora:"15:45"},
+        {grupo:"C4", casa:"Islândia", fora:"Estónia", hora:"13:00"},
         {grupo:"A3", casa:"Chéquia", fora:"Croácia" , hora: "15:45"},
         {grupo:"A3", casa:"Inglaterra", fora:"Espanha" , hora: "15:45"}
       ]}
