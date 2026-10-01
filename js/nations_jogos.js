@@ -38,7 +38,7 @@ const FIXTURES = [
         {grupo:"C3", casa:"Ilhas Faroé", fora:"Cazaquistão", hora:"13:00"},
         {grupo:"C3", casa:"Eslováquia", fora:"República da Moldávia" , hora: "15:45"},
         {grupo:"C4", casa:"Bulgária", fora:"Luxemburgo", hora:"13:00"},
-        {grupo:"C4", casa:"Islândia", fora:"Estónia", hora:"13:00"},
+        {grupo:"C4", casa:"Islândia", fora:"Estónia", hora:"15:45"},
         {grupo:"A3", casa:"Chéquia", fora:"Croácia" , hora: "15:45"},
         {grupo:"A3", casa:"Inglaterra", fora:"Espanha" , hora: "15:45"}
       ]}
@@ -98,8 +98,8 @@ const FIXTURES = [
       { data:"Sexta-feira, 2 de Outubro", jogos:[
         {grupo:"C3", casa:"Cazaquistão", fora:"República da Moldávia", hora:"11:00"},
         {grupo:"C3", casa:"Ilhas Faroé", fora:"Eslováquia" , hora: "15:45"},
-        {grupo:"C2", casa:"Chipre", fora:"Arménia", hora:"17:00"},
-        {grupo:"C2", casa:"Letónia", fora:"Montenegro", hora:"17:00"},
+        {grupo:"C2", casa:"Chipre", fora:"Arménia", hora:"13:00"},
+        {grupo:"C2", casa:"Letónia", fora:"Montenegro", hora:"13:00"},
         {grupo:"B4", casa:"Bósnia e Herzegovina", fora:"Suécia" , hora: "15:45"},
         {grupo:"B4", casa:"Polónia", fora:"Roménia" , hora: "15:45"},
         {grupo:"B2", casa:"Hungria", fora:"Geórgia" , hora: "15:45"},
