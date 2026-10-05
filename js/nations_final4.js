@@ -1,25 +1,47 @@
 /* =======================================================================
    NATIONS_FINAL4.JS
-   Mata-mata da Final Four: os 4 vencedores dos grupos da Liga A
-   (A1 a A4) disputam meias-finais, jogo de 3º lugar e final.
+   Mata-mata da Liga A: os 2 primeiros de cada grupo (A1 a A4) — 8
+   seleções ao todo — disputam as Quartas de Final. Os vencedores
+   avançam às Meias-finais, depois à Final e ao jogo de 3º lugar.
    ======================================================================= */
 
 const GRUPOS_LIGA_A = ["A1","A2","A3","A4"];
 
-/* Estado do mata-mata (em memória) */
+/* Emparelhamento padrão das quartas: o 1º de um grupo encara o 2º de
+   outro grupo, evitando repetir logo de cara um adversário do próprio
+   grupo. Os confrontos são recalculados automaticamente conforme a
+   classificação muda — não há pareamento manual nesta fase. */
+const QUARTOS_PAREAMENTO = [
+  { id:"qf1", casa:{grupo:"A1",pos:0}, fora:{grupo:"A4",pos:1} },
+  { id:"qf2", casa:{grupo:"A2",pos:0}, fora:{grupo:"A3",pos:1} },
+  { id:"qf3", casa:{grupo:"A3",pos:0}, fora:{grupo:"A2",pos:1} },
+  { id:"qf4", casa:{grupo:"A4",pos:0}, fora:{grupo:"A1",pos:1} }
+];
+
+/* Estado do mata-mata (em memória, não persiste após recarregar) */
 const final4State = {
-  pareamento: { sf1:["A1","A2"], sf2:["A3","A4"] }, // qual grupo em cada lado
   placares: {
-    sf1: { casa:"", fora:"", penCasa:"", penFora:"" },
-    sf2: { casa:"", fora:"", penCasa:"", penFora:"" },
-    final: { casa:"", fora:"", penCasa:"", penFora:"" },
-    terceiro: { casa:"", fora:"", penCasa:"", penFora:"" }
+    qf1:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    qf2:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    qf3:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    qf4:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    sf1:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    sf2:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    final:{ casa:"", fora:"", penCasa:"", penFora:"" },
+    terceiro:{ casa:"", fora:"", penCasa:"", penFora:"" }
   }
 };
 
-function vencedorGrupoA(grupo){
+/* Devolve o 1º e o 2º colocado atuais de um grupo da Liga A */
+function qualificadosGrupo(grupo){
   const standings = computeStandings(grupo);
-  return standings[0].time;
+  return { primeiro: standings[0].time, segundo: standings[1].time };
+}
+
+/* Resolve qual seleção ocupa um "slot" do pareamento (ex: 1º do A1) */
+function timeDoSlot(slot){
+  const q = qualificadosGrupo(slot.grupo);
+  return slot.pos === 0 ? q.primeiro : q.segundo;
 }
 
 /* Devolve {vencedor, empatou} de um confronto dados os placares e,
@@ -41,38 +63,32 @@ function resolverConfronto(placar, timeCasa, timeFora){
   return { vencedor:null, empatou:true };
 }
 
-function renderSemifinalistas(){
+/* Tira do ar os 8 qualificados (1º e 2º de cada grupo), agrupados */
+function renderQualificados(){
   const container = document.getElementById("final4Semifinalistas");
   let html = "";
   GRUPOS_LIGA_A.forEach(g=>{
-    const vencedor = vencedorGrupoA(g);
+    const { primeiro, segundo } = qualificadosGrupo(g);
     html += `<div class="final4-team-chip">
-      <span class="grupo-tag">${g}</span> ${flagImg(vencedor)} ${vencedor}
+      <span class="grupo-tag">${g}</span> <span class="qualif-pos">1º</span> ${flagImg(primeiro)} ${primeiro}
+    </div>`;
+    html += `<div class="final4-team-chip">
+      <span class="grupo-tag">${g}</span> <span class="qualif-pos">2º</span> ${flagImg(segundo)} ${segundo}
     </div>`;
   });
   container.innerHTML = html;
 }
 
-function selectDeTimes(idSelect, valorAtual, opcoes){
-  const options = opcoes.map(t => `<option value="${t}" ${t===valorAtual?"selected":""}>${t}</option>`).join("");
-  return `<select id="${idSelect}" class="f4-team-pick">${options}</select>`;
-}
-
-function renderMatchBox({ id, titulo, timeCasaDefault, timeForaDefault, placarKey, timeCasaFixo, timeForaFixo, opcoesCasa, opcoesFora }){
+function renderMatchBox({ id, titulo, placarKey, timeCasaFixo, timeForaFixo }){
   const placar = final4State.placares[placarKey];
-  const timeCasa = timeCasaFixo || document.getElementById(`${id}-casa-select`)?.value || timeCasaDefault;
-  const timeFora = timeForaFixo || document.getElementById(`${id}-fora-select`)?.value || timeForaDefault;
+  const timeCasa = timeCasaFixo;
+  const timeFora = timeForaFixo;
 
   const resultado = (timeCasa && timeFora) ? resolverConfronto(placar, timeCasa, timeFora) : { vencedor:null, empatou:false };
   const precisaPenaltis = resultado.empatou;
 
-  const ladoCasa = opcoesCasa
-    ? `${flagImg(timeCasa)}${selectDeTimes(`${id}-casa-select`, timeCasa, opcoesCasa)}`
-    : `${flagImg(timeCasa, "flag flag-lg")}<span class="f4-team-name">${timeCasa || "—"}</span>`;
-
-  const ladoFora = opcoesFora
-    ? `${flagImg(timeFora)}${selectDeTimes(`${id}-fora-select`, timeFora, opcoesFora)}`
-    : `${flagImg(timeFora, "flag flag-lg")}<span class="f4-team-name">${timeFora || "—"}</span>`;
+  const ladoCasa = `${flagImg(timeCasa, "flag flag-lg")}<span class="f4-team-name">${timeCasa || "—"}</span>`;
+  const ladoFora = `${flagImg(timeFora, "flag flag-lg")}<span class="f4-team-name">${timeFora || "—"}</span>`;
 
   let html = `<div class="f4-match" data-match="${id}">
     <div class="f4-match-header">${titulo}</div>
@@ -106,34 +122,38 @@ function renderMatchBox({ id, titulo, timeCasaDefault, timeForaDefault, placarKe
 }
 
 function renderFinal4(){
-  renderSemifinalistas();
+  renderQualificados();
 
-  const todosOsVencedores = GRUPOS_LIGA_A.map(vencedorGrupoA);
+  /* ---- Quartas de Final (8 times, 4 jogos) ---- */
+  const qf = QUARTOS_PAREAMENTO.map(par=>{
+    const casa = timeDoSlot(par.casa);
+    const fora = timeDoSlot(par.fora);
+    return renderMatchBox({
+      id: par.id,
+      titulo: `Quartas de Final — ${par.id.toUpperCase().replace("QF","")}`,
+      placarKey: par.id,
+      timeCasaFixo: casa,
+      timeForaFixo: fora
+    });
+  });
 
-  const sf1Casa = vencedorGrupoA(final4State.pareamento.sf1[0]);
-  const sf1Fora = vencedorGrupoA(final4State.pareamento.sf1[1]);
-  const sf2Casa = vencedorGrupoA(final4State.pareamento.sf2[0]);
-  const sf2Fora = vencedorGrupoA(final4State.pareamento.sf2[1]);
-
+  /* ---- Meias-finais (vencedores das quartas, no bracket padrão) ---- */
   const sf1 = renderMatchBox({
-    id:"sf1", titulo:"Meia-final 1",
-    timeCasaDefault:sf1Casa, timeForaDefault:sf1Fora,
-    placarKey:"sf1", timeCasaFixo:sf1Casa, timeForaFixo:sf1Fora
+    id:"sf1", titulo:"Meia-final 1", placarKey:"sf1",
+    timeCasaFixo: qf[0].vencedor, timeForaFixo: qf[1].vencedor
   });
   const sf2 = renderMatchBox({
-    id:"sf2", titulo:"Meia-final 2",
-    timeCasaDefault:sf2Casa, timeForaDefault:sf2Fora,
-    placarKey:"sf2", timeCasaFixo:sf2Casa, timeForaFixo:sf2Fora
+    id:"sf2", titulo:"Meia-final 2", placarKey:"sf2",
+    timeCasaFixo: qf[2].vencedor, timeForaFixo: qf[3].vencedor
   });
 
+  /* ---- Final e 3º lugar ---- */
   const finalBox = renderMatchBox({
-    id:"final", titulo:"Final",
-    placarKey:"final",
+    id:"final", titulo:"Final", placarKey:"final",
     timeCasaFixo: sf1.vencedor, timeForaFixo: sf2.vencedor
   });
   const terceiroBox = renderMatchBox({
-    id:"terceiro", titulo:"Jogo de 3º lugar",
-    placarKey:"terceiro",
+    id:"terceiro", titulo:"Jogo de 3º lugar", placarKey:"terceiro",
     timeCasaFixo: sf1.perdedor, timeForaFixo: sf2.perdedor
   });
 
@@ -150,14 +170,9 @@ function renderFinal4(){
   const container = document.getElementById("final4Bracket");
   container.innerHTML = `
     ${bannerHtml}
-    <div class="f4-stage-title">Meias-finais (define o par manualmente, se quiseres trocar)</div>
-    <div class="f4-pareamento-controls">
-      <label>Meia-final 1: 
-        ${selectDeTimes("pareamentoSf1Casa", final4State.pareamento.sf1[0], GRUPOS_LIGA_A)}
-        vs
-        ${selectDeTimes("pareamentoSf1Fora", final4State.pareamento.sf1[1], GRUPOS_LIGA_A)}
-      </label>
-    </div>
+    <div class="f4-stage-title">Quartas de Final (1º e 2º de cada grupo da Liga A)</div>
+    <div class="f4-row f4-row-4">${qf.map(q=>q.html).join("")}</div>
+    <div class="f4-stage-title">Meias-finais</div>
     <div class="f4-row">${sf1.html}${sf2.html}</div>
     <div class="f4-stage-title">Final &amp; 3º lugar</div>
     <div class="f4-row">${finalBox.html}${terceiroBox.html}</div>
@@ -173,33 +188,28 @@ function renderFinal4(){
   }
 }
 
-/* Delegação de eventos: placares e pênaltis */
+/* Delegação de eventos: placares e pênaltis (funciona pra qualquer
+   fase — qf1..qf4, sf1, sf2, final, terceiro — pela chave data-key) */
 safeOn("final4Bracket", "input", (e)=>{
   const el = e.target;
   const key = el.dataset.key;
-  if(!key) return;
+  if(!key || !final4State.placares[key]) return;
 
   if(el.matches(".f4-score-casa")) final4State.placares[key].casa = el.value;
   if(el.matches(".f4-score-fora")) final4State.placares[key].fora = el.value;
-  if(el.matches(".f4-pen-select")){
-    // guarda um valor simbólico de pênaltis (1-0) a favor de quem foi escolhido
-    if(el.value === "casa"){ final4State.placares[key].penCasa = "1"; final4State.placares[key].penFora = "0"; }
-    else if(el.value === "fora"){ final4State.placares[key].penCasa = "0"; final4State.placares[key].penFora = "1"; }
-    else { final4State.placares[key].penCasa = ""; final4State.placares[key].penFora = ""; }
-  }
   renderFinal4();
 });
 
-/* Troca manual do emparelhamento das meias-finais */
 safeOn("final4Bracket", "change", (e)=>{
-  if(e.target.id === "pareamentoSf1Casa" || e.target.id === "pareamentoSf1Fora"){
-    const casa = document.getElementById("pareamentoSf1Casa").value;
-    const fora = document.getElementById("pareamentoSf1Fora").value;
-    if(casa === fora) return; // evita repetir o mesmo grupo nos dois lados
-    final4State.pareamento.sf1 = [casa, fora];
-    final4State.pareamento.sf2 = GRUPOS_LIGA_A.filter(g => g !== casa && g !== fora);
-    renderFinal4();
-  }
+  const el = e.target;
+  if(!el.matches(".f4-pen-select")) return;
+  const key = el.dataset.key;
+  if(!key || !final4State.placares[key]) return;
+
+  if(el.value === "casa"){ final4State.placares[key].penCasa = "1"; final4State.placares[key].penFora = "0"; }
+  else if(el.value === "fora"){ final4State.placares[key].penCasa = "0"; final4State.placares[key].penFora = "1"; }
+  else { final4State.placares[key].penCasa = ""; final4State.placares[key].penFora = ""; }
+  renderFinal4();
 });
 
 document.addEventListener("DOMContentLoaded", ()=>{

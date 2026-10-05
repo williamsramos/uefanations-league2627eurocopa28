@@ -222,14 +222,15 @@ function renderStandings(){
     standings.forEach((t,i)=>{
       let rowClass = "";
       let tag = "";
-      if(i === 0){
-        if(liga === "A"){
-          rowClass = "row-final4";
-          tag = `<span class="status-tag final4">Final Four</span>`;
-        } else {
-          rowClass = "row-sobe";
-          tag = `<span class="status-tag sobe">Sobe à Liga ${LIGA_SOBE_PARA[liga]}</span>`;
-        }
+      if(i === 0 && liga === "A"){
+        rowClass = "row-quartas";
+        tag = `<span class="status-tag quartas">Quartas de Final</span>`;
+      } else if(i === 1 && liga === "A"){
+        rowClass = "row-quartas";
+        tag = `<span class="status-tag quartas">Quartas de Final</span>`;
+      } else if(i === 0){
+        rowClass = "row-sobe";
+        tag = `<span class="status-tag sobe">Sobe à Liga ${LIGA_SOBE_PARA[liga]}</span>`;
       } else if(i === standings.length - 1 && standings.length > 1 && LIGA_DESCE_PARA[liga]){
         rowClass = "row-desce";
         tag = `<span class="status-tag desce">Desce à Liga ${LIGA_DESCE_PARA[liga]}</span>`;

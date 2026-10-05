@@ -312,7 +312,7 @@ table.standings-table img.flag{
 
 /* ---- Promoção / Rebaixamento / Final Four ---- */
 table.standings-table tbody tr.row-sobe{background:rgba(31,174,89,.16);}
-table.standings-table tbody tr.row-final4{background:rgba(245,197,24,.16);}
+table.standings-table tbody tr.row-quartas{background:rgba(245,197,24,.16);}
 table.standings-table tbody tr.row-desce{background:rgba(227,6,19,.14);}
 
 .status-tag{
@@ -326,7 +326,7 @@ table.standings-table tbody tr.row-desce{background:rgba(227,6,19,.14);}
   white-space:nowrap;
 }
 .status-tag.sobe{background:rgba(31,174,89,.3);color:#4ee08a;}
-.status-tag.final4{background:rgba(245,197,24,.3);color:var(--dourado);}
+.status-tag.quartas{background:rgba(245,197,24,.3);color:var(--dourado);}
 .status-tag.desce{background:rgba(227,6,19,.3);color:#ff8a90;}
 
 /* ---- Destaque de busca ---- */
@@ -532,6 +532,14 @@ table.standings-table tbody tr.row-buscada{
 }
 .final4-team-chip .grupo-tag{color:var(--dourado);font-size:.7rem;}
 .final4-team-chip img.flag{width:20px;height:14px;object-fit:cover;border-radius:2px;}
+.final4-team-chip .qualif-pos{
+  background:rgba(255,255,255,.08);
+  color:var(--texto-suave);
+  font-size:.68rem;
+  font-weight:700;
+  padding:1px 6px;
+  border-radius:8px;
+}
 
 /* Bandeiras dentro dos cards de confronto e do banner de campeão */
 .f4-match img.flag,
@@ -590,6 +598,10 @@ table.standings-table tbody tr.row-buscada{
 body.light-mode .f4-pareamento-controls select.f4-team-pick{background:#fff;}
 
 .f4-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;}
+
+/* Fileira das Quartas de Final: 4 jogos, cards um pouco mais estreitos
+   que os das meias/final pra caberem melhor lado a lado */
+.f4-row-4 .f4-match{flex:1 1 240px;max-width:270px;}
 
 .f4-match{
   background:var(--azul-painel);
