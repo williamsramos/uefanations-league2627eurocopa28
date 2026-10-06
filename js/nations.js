@@ -196,6 +196,46 @@ function computeStandings(grupo){
 const LIGA_SOBE_PARA = { B:"A", C:"B", D:"C" }; // para onde sobe o 1º de cada liga
 const LIGA_DESCE_PARA = { A:"B", B:"C", C:"D" }; // para onde desce o último de cada liga
 
+/* Define a tag e a cor de destaque de cada linha da classificação,
+   de acordo com a posição (i, começando em 0) e a liga do grupo.
+   Regras 2026/2027:
+   - Liga A: 1º e 2º -> Quartas de Final; 3º -> Playoff de Rebaixamento;
+     último -> Desce automaticamente.
+   - Liga B: 1º -> Sobe automaticamente; 2º -> Promotion Play-off;
+     3º -> Playoff de Rebaixamento; último -> Desce automaticamente.
+   - Liga C: 1º -> Sobe automaticamente; 2º -> Promotion Play-off;
+     último -> Desce automaticamente.
+   - Liga D: 1º -> Sobe automaticamente; 2º -> Promotion Play-off
+     (liga mais baixa, não há descida). */
+function tagDaPosicao(liga, i, totalTimes){
+  const ultimo = (i === totalTimes - 1);
+
+  if(liga === "A"){
+    if(i === 0 || i === 1){
+      return { rowClass:"row-quartas", tag:`<span class="status-tag quartas">Quartas de Final</span>` };
+    }
+    if(i === 2){
+      return { rowClass:"row-playoff-desce", tag:`<span class="status-tag playoff-desce">Playoff de Rebaixamento</span>` };
+    }
+  } else {
+    if(i === 0){
+      return { rowClass:"row-sobe", tag:`<span class="status-tag sobe">Sobe à Liga ${LIGA_SOBE_PARA[liga]}</span>` };
+    }
+    if(i === 1){
+      return { rowClass:"row-playoff-sobe", tag:`<span class="status-tag playoff-sobe">Promotion Play-off</span>` };
+    }
+    if(i === 2 && liga === "B"){
+      return { rowClass:"row-playoff-desce", tag:`<span class="status-tag playoff-desce">Playoff de Rebaixamento</span>` };
+    }
+  }
+
+  if(ultimo && totalTimes > 1 && LIGA_DESCE_PARA[liga]){
+    return { rowClass:"row-desce", tag:`<span class="status-tag desce">Desce à Liga ${LIGA_DESCE_PARA[liga]}</span>` };
+  }
+
+  return { rowClass:"", tag:"" };
+}
+
 function renderStandings(){
   const container = document.getElementById("standingsContainer");
   const grupos = gruposParaMostrar();
@@ -220,21 +260,8 @@ function renderStandings(){
         </tr></thead>
         <tbody>`;
     standings.forEach((t,i)=>{
-      let rowClass = "";
-      let tag = "";
-      if(i === 0 && liga === "A"){
-        rowClass = "row-quartas";
-        tag = `<span class="status-tag quartas">Quartas de Final</span>`;
-      } else if(i === 1 && liga === "A"){
-        rowClass = "row-quartas";
-        tag = `<span class="status-tag quartas">Quartas de Final</span>`;
-      } else if(i === 0){
-        rowClass = "row-sobe";
-        tag = `<span class="status-tag sobe">Sobe à Liga ${LIGA_SOBE_PARA[liga]}</span>`;
-      } else if(i === standings.length - 1 && standings.length > 1 && LIGA_DESCE_PARA[liga]){
-        rowClass = "row-desce";
-        tag = `<span class="status-tag desce">Desce à Liga ${LIGA_DESCE_PARA[liga]}</span>`;
-      }
+      const { rowClass: tagRowClass, tag } = tagDaPosicao(liga, i, standings.length);
+      let rowClass = tagRowClass;
       if(timeCorrespondeBusca(t.time)) rowClass += " row-buscada";
 
       html += `<tr class="${rowClass}">

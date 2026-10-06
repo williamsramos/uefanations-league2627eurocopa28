@@ -313,6 +313,8 @@ table.standings-table img.flag{
 /* ---- Promoção / Rebaixamento / Final Four ---- */
 table.standings-table tbody tr.row-sobe{background:rgba(31,174,89,.16);}
 table.standings-table tbody tr.row-quartas{background:rgba(245,197,24,.16);}
+table.standings-table tbody tr.row-playoff-sobe{background:rgba(56,189,248,.14);}
+table.standings-table tbody tr.row-playoff-desce{background:rgba(251,146,60,.14);}
 table.standings-table tbody tr.row-desce{background:rgba(227,6,19,.14);}
 
 .status-tag{
@@ -327,6 +329,8 @@ table.standings-table tbody tr.row-desce{background:rgba(227,6,19,.14);}
 }
 .status-tag.sobe{background:rgba(31,174,89,.3);color:#4ee08a;}
 .status-tag.quartas{background:rgba(245,197,24,.3);color:var(--dourado);}
+.status-tag.playoff-sobe{background:rgba(56,189,248,.28);color:#7dd3fc;}
+.status-tag.playoff-desce{background:rgba(251,146,60,.3);color:#fdba74;}
 .status-tag.desce{background:rgba(227,6,19,.3);color:#ff8a90;}
 
 /* ---- Destaque de busca ---- */
