@@ -35,7 +35,7 @@
     <nav class="sub-tabs" id="nationsSubTabs">
       <button class="sub-tab-btn active" data-sub="classificacao">Classificação</button>
       <button class="sub-tab-btn" data-sub="jogos">Jogos</button>
-      <button class="sub-tab-btn" data-sub="final4">Final Four</button>
+      <button class="sub-tab-btn" data-sub="final4">Fase Final</button>
       <button class="sub-tab-btn" data-sub="campeoes">Campeões</button>
     </nav>
 
@@ -76,7 +76,7 @@
 
     <!-- ------- FINAL FOUR ------- -->
     <div id="final4" class="sub-section">
-      <h2>Fase Final — Liga A</h2>
+      <h2>Fase Final e Playoffs</h2>
       <img src="img/trofeu_nations.png" alt="Troféu da UEFA Nations League" class="trofeu-final4" onerror="this.style.display='none'">
       <p class="hint centro">Os 2 primeiros de cada grupo da Liga A (A1 a A4) — 8 seleções ao todo — se
       classificam para as Quartas de Final. Os vencedores avançam às Meias-finais e depois à Final e ao
@@ -85,6 +85,12 @@
 
       <div id="final4Semifinalistas" class="final4-teams"></div>
       <div id="final4Bracket" class="final4-bracket"></div>
+
+      <h2 class="po-title">Playoffs de Acesso e Rebaixamento</h2>
+      <p class="hint centro">Todos os confrontos são em ida e volta. Quem vence fica (ou sobe para) a liga
+      de cima; quem perde fica (ou desce para) a liga de baixo. Os pares seguem o ranking entre grupos:
+      melhor campanha da liga superior contra a pior da inferior.</p>
+      <div id="playoffsContainer" class="po-container"></div>
     </div>
 
     <!-- ------- CAMPEÕES ------- -->
