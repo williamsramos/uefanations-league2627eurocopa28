@@ -196,44 +196,60 @@ function computeStandings(grupo){
 const LIGA_SOBE_PARA = { B:"A", C:"B", D:"C" }; // para onde sobe o 1º de cada liga
 const LIGA_DESCE_PARA = { A:"B", B:"C", C:"D" }; // para onde desce o último de cada liga
 
-/* Define a tag e a cor de destaque de cada linha da classificação,
-   de acordo com a posição (i, começando em 0) e a liga do grupo.
-   Regras 2026/2027:
-   - Liga A: 1º e 2º -> Quartas de Final; 3º -> Playoff de Rebaixamento;
-     último -> Desce automaticamente.
-   - Liga B: 1º -> Sobe automaticamente; 2º -> Promotion Play-off;
-     3º -> Playoff de Rebaixamento; último -> Desce automaticamente.
-   - Liga C: 1º -> Sobe automaticamente; 2º -> Promotion Play-off;
-     último -> Desce automaticamente.
-   - Liga D: 1º -> Sobe automaticamente; 2º -> Promotion Play-off
-     (liga mais baixa, não há descida). */
-function tagDaPosicao(liga, i, totalTimes){
+/* Compara duas linhas de classificação de grupos diferentes
+   (melhor campanha primeiro): pontos, saldo, gols pró, nome. */
+function melhorCampanha(a, b){
+  return b.pts - a.pts || b.sg - a.sg || b.gp - a.gp || a.time.localeCompare(b.time);
+}
+
+/* Ranking (melhor -> pior) dos times de uma mesma posição (0 = 1º...)
+   entre todos os grupos de uma liga. */
+function rankingPosicao(liga, pos){
+  return LIGAS[liga]
+    .map(g => computeStandings(g)[pos])
+    .filter(Boolean)
+    .sort(melhorCampanha);
+}
+
+/* Quem vai a cada playoff de promoção/rebaixamento:
+   - Playoff A/B: os 2 piores 3º + os 2 melhores 4º da Liga A
+     contra os 4 segundos colocados da Liga B.
+   - Playoff B/C: os 4 últimos (4º) da Liga B contra os 4 segundos
+     colocados da Liga C. */
+function classificadosPlayoffs(){
+  const a3 = rankingPosicao("A", 2);
+  const a4 = rankingPosicao("A", 3);
+  return {
+    rebaixA: [...a3.slice(2), ...a4.slice(0, 2)].sort(melhorCampanha), // melhor -> pior
+    promoB: rankingPosicao("B", 1),
+    rebaixB: rankingPosicao("B", 3),
+    promoC: rankingPosicao("C", 1)
+  };
+}
+
+/* Tag e cor de cada linha da classificação (regras 2026/2027):
+   - Liga A: 1º/2º -> Quartas; 3º/4º -> Playoff A/B (2 piores 3º e 2 melhores
+     4º, entre grupos), os 2 piores 4º descem direto, os 2 melhores 3º ficam.
+   - Liga B: 1º sobe; 2º -> Playoff A/B; 4º -> Playoff B/C.
+   - Liga C: 1º sobe; 2º -> Playoff B/C; último desce.
+   - Liga D: 1º sobe. */
+function tagDaPosicao(liga, i, totalTimes, time, cp){
+  const po = (cls, txt) => ({ rowClass:"row-"+cls, tag:`<span class="status-tag ${cls}">${txt}</span>` });
+  const nada = { rowClass:"", tag:"" };
   const ultimo = (i === totalTimes - 1);
 
   if(liga === "A"){
-    if(i === 0 || i === 1){
-      return { rowClass:"row-quartas", tag:`<span class="status-tag quartas">Quartas de Final</span>` };
-    }
-    if(i === 2){
-      return { rowClass:"row-playoff-desce", tag:`<span class="status-tag playoff-desce">Playoff de Rebaixamento</span>` };
-    }
-  } else {
-    if(i === 0){
-      return { rowClass:"row-sobe", tag:`<span class="status-tag sobe">Sobe à Liga ${LIGA_SOBE_PARA[liga]}</span>` };
-    }
-    if(i === 1){
-      return { rowClass:"row-playoff-sobe", tag:`<span class="status-tag playoff-sobe">Promotion Play-off</span>` };
-    }
-    if(i === 2 && liga === "B"){
-      return { rowClass:"row-playoff-desce", tag:`<span class="status-tag playoff-desce">Playoff de Rebaixamento</span>` };
-    }
+    if(i <= 1) return po("quartas", "Quartas de Final");
+    if(cp.rebaixA.some(t => t.time === time)) return po("playoff-desce", "Playoff A/B");
+    if(ultimo) return po("desce", `Desce à Liga ${LIGA_DESCE_PARA.A}`);
+    return nada;
   }
-
-  if(ultimo && totalTimes > 1 && LIGA_DESCE_PARA[liga]){
-    return { rowClass:"row-desce", tag:`<span class="status-tag desce">Desce à Liga ${LIGA_DESCE_PARA[liga]}</span>` };
-  }
-
-  return { rowClass:"", tag:"" };
+  if(i === 0) return po("sobe", `Sobe à Liga ${LIGA_SOBE_PARA[liga]}`);
+  if(liga === "B" && i === 1) return po("playoff-sobe", "Playoff A/B");
+  if(liga === "B" && ultimo) return po("playoff-desce", "Playoff B/C");
+  if(liga === "C" && i === 1) return po("playoff-sobe", "Playoff B/C");
+  if(liga === "C" && ultimo) return po("desce", `Desce à Liga ${LIGA_DESCE_PARA.C}`);
+  return nada;
 }
 
 function renderStandings(){
@@ -246,6 +262,7 @@ function renderStandings(){
   }
 
   let html = "";
+  const cp = classificadosPlayoffs();
 
   grupos.forEach(g=>{
     const standings = computeStandings(g);
@@ -260,7 +277,7 @@ function renderStandings(){
         </tr></thead>
         <tbody>`;
     standings.forEach((t,i)=>{
-      const { rowClass: tagRowClass, tag } = tagDaPosicao(liga, i, standings.length);
+      const { rowClass: tagRowClass, tag } = tagDaPosicao(liga, i, standings.length, t.time, cp);
       let rowClass = tagRowClass;
       if(timeCorrespondeBusca(t.time)) rowClass += " row-buscada";
 
