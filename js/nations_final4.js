@@ -21,10 +21,6 @@ const QUARTOS_PAREAMENTO = [
 /* Estado do mata-mata (em memória, não persiste após recarregar) */
 const final4State = {
   placares: {
-    qf1:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    qf2:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    qf3:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    qf4:{ casa:"", fora:"", penCasa:"", penFora:"" },
     sf1:{ casa:"", fora:"", penCasa:"", penFora:"" },
     sf2:{ casa:"", fora:"", penCasa:"", penFora:"" },
     final:{ casa:"", fora:"", penCasa:"", penFora:"" },
@@ -129,21 +125,63 @@ function renderMatchBox({ id, titulo, placarKey, timeCasaFixo, timeForaFixo }){
   return { html, vencedor: resultado.vencedor, perdedor: resultado.vencedor ? (resultado.vencedor===timeCasa?timeFora:timeCasa) : null, timeCasa, timeFora };
 }
 
+/* ---------- Quartas de Final: ida e volta ----------
+   "p" = 1º do grupo, "s" = 2º do grupo. Ida: o 2º joga em casa.
+   Volta: o 1º joga em casa. Vence quem tiver melhor agregado; se
+   empatar, escolhe-se quem vence nos pênaltis. */
+const qfState = {};
+QUARTOS_PAREAMENTO.forEach(p=>{ qfState[p.id] = { ida:{p:"",s:""}, volta:{p:"",s:""}, pen:"" }; });
+
+function renderQuartaTie(par){
+  const tP = timeDoSlot(par.casa), tS = timeDoSlot(par.fora);
+  const st = qfState[par.id];
+  const completo = [st.ida.p, st.ida.s, st.volta.p, st.volta.s].every(v => v !== "" && !isNaN(parseInt(v)));
+  let agg = "", res = "", vencedor = null, empate = false;
+  if(completo){
+    const p = parseInt(st.ida.p) + parseInt(st.volta.p);
+    const sc = parseInt(st.ida.s) + parseInt(st.volta.s);
+    agg = `Agregado: ${tP} ${p} - ${sc} ${tS}`;
+    if(p > sc) vencedor = tP;
+    else if(sc > p) vencedor = tS;
+    else if(st.pen === "p") vencedor = tP;
+    else if(st.pen === "s") vencedor = tS;
+    else empate = true;
+    res = vencedor ? `🏆 ${vencedor} avança às meias-finais` : "Empate no agregado — escolha quem vence nos pênaltis";
+  }
+  const inp = (leg, side, val) =>
+    `<input type="number" min="0" max="99" class="po-in qf-in" data-qf="${par.id}" data-leg="${leg}" data-side="${side}" value="${val}">`;
+  const html = `<div class="po-tie" data-qf="${par.id}">
+    <div class="f4-match-header">Quartas de Final — Jogo ${par.id.replace("qf","")}</div>
+    <div class="po-body">
+      <div class="po-leg-label">Ida</div>
+      <div class="po-leg">
+        <span class="po-team">${flagImg(tS)} <span>${tS}</span></span>
+        <span class="po-score">${inp("ida","s",st.ida.s)}-${inp("ida","p",st.ida.p)}</span>
+        <span class="po-team right"><span>${tP}</span> ${flagImg(tP)}</span>
+      </div>
+      <div class="po-leg-label">Volta</div>
+      <div class="po-leg">
+        <span class="po-team">${flagImg(tP)} <span>${tP}</span></span>
+        <span class="po-score">${inp("volta","p",st.volta.p)}-${inp("volta","s",st.volta.s)}</span>
+        <span class="po-team right"><span>${tS}</span> ${flagImg(tS)}</span>
+      </div>
+      <div class="po-agg">${agg}</div>
+      ${empate ? `<div class="po-pen"><select class="qf-pen-select" data-qf="${par.id}">
+        <option value="">-- vence nos pênaltis --</option>
+        <option value="p" ${st.pen==="p"?"selected":""}>${tP}</option>
+        <option value="s" ${st.pen==="s"?"selected":""}>${tS}</option>
+      </select></div>` : ""}
+      <div class="po-result">${res}</div>
+    </div>
+  </div>`;
+  return { html, vencedor };
+}
+
 function renderFinal4(){
   renderQualificados();
 
   /* ---- Quartas de Final (8 times, 4 jogos) ---- */
-  const qf = QUARTOS_PAREAMENTO.map(par=>{
-    const casa = timeDoSlot(par.casa);
-    const fora = timeDoSlot(par.fora);
-    return renderMatchBox({
-      id: par.id,
-      titulo: `Quartas de Final — ${par.id.toUpperCase().replace("QF","")}`,
-      placarKey: par.id,
-      timeCasaFixo: casa,
-      timeForaFixo: fora
-    });
-  });
+  const qf = QUARTOS_PAREAMENTO.map(par => renderQuartaTie(par));
 
   /* ---- Meias-finais (vencedores das quartas, no bracket padrão) ---- */
   const sf1 = renderMatchBox({
@@ -178,8 +216,8 @@ function renderFinal4(){
   const container = document.getElementById("final4Bracket");
   container.innerHTML = `
     ${bannerHtml}
-    <div class="f4-stage-title">Quartas de Final (1º e 2º de cada grupo da Liga A)</div>
-    <div class="f4-row f4-row-4">${qf.map(q=>q.html).join("")}</div>
+    <div class="f4-stage-title">Quartas de Final — ida e volta (1º e 2º de cada grupo da Liga A)</div>
+    <div class="po-grid">${qf.map(q=>q.html).join("")}</div>
     <div class="f4-stage-title">Meias-finais</div>
     <div class="f4-row">${sf1.html}${sf2.html}</div>
     <div class="f4-stage-title">Final &amp; 3º lugar</div>
@@ -217,6 +255,27 @@ safeOn("final4Bracket", "change", (e)=>{
   if(el.value === "casa"){ final4State.placares[key].penCasa = "1"; final4State.placares[key].penFora = "0"; }
   else if(el.value === "fora"){ final4State.placares[key].penCasa = "0"; final4State.placares[key].penFora = "1"; }
   else { final4State.placares[key].penCasa = ""; final4State.placares[key].penFora = ""; }
+  renderFinal4();
+});
+
+safeOn("final4Bracket", "input", (e)=>{
+  const el = e.target;
+  if(!el.matches(".qf-in")) return;
+  const st = qfState[el.dataset.qf];
+  if(!st) return;
+  st[el.dataset.leg][el.dataset.side] = el.value;
+  st.pen = "";
+  const sel = `.qf-in[data-qf="${el.dataset.qf}"][data-leg="${el.dataset.leg}"][data-side="${el.dataset.side}"]`;
+  renderFinal4();
+  document.querySelector(sel)?.focus(); // mantém o cursor no campo após redesenhar
+});
+
+safeOn("final4Bracket", "change", (e)=>{
+  const el = e.target;
+  if(!el.matches(".qf-pen-select")) return;
+  const st = qfState[el.dataset.qf];
+  if(!st) return;
+  st.pen = el.value;
   renderFinal4();
 });
 
