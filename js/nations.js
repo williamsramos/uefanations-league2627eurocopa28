@@ -161,6 +161,26 @@ function gruposParaMostrar(){
   return grupos;
 }
 
+/* Mini-tabela só com os jogos entre os times indicados (confronto direto) */
+function confrontoDireto(grupo, times){
+  const t = {};
+  times.forEach(n => t[n] = { pts:0, gp:0, gc:0, sg:0 });
+  Object.keys(matchResults).forEach(key=>{
+    const [grp, home, away] = key.split("::");
+    if(grp !== grupo || !t[home] || !t[away]) return;
+    const r = matchResults[key];
+    const gh = parseInt(r.golsCasa), ga = parseInt(r.golsFora);
+    if(isNaN(gh) || isNaN(ga)) return;
+    t[home].gp += gh; t[home].gc += ga;
+    t[away].gp += ga; t[away].gc += gh;
+    if(gh > ga) t[home].pts += 3;
+    else if(gh < ga) t[away].pts += 3;
+    else { t[home].pts++; t[away].pts++; }
+  });
+  times.forEach(n => t[n].sg = t[n].gp - t[n].gc);
+  return t;
+}
+
 function computeStandings(grupo){
   const teams = GROUPS[grupo];
   const table = {};
@@ -189,8 +209,29 @@ function computeStandings(grupo){
 
   const arr = Object.values(table);
   arr.forEach(t=> t.sg = t.gp - t.gc);
-  arr.sort((a,b)=> b.pts-a.pts || b.sg-a.sg || b.gp-a.gp || a.time.localeCompare(b.time));
-  return arr;
+  /* Desempate estilo UEFA: 1º pontos; se empatar, confronto direto
+     (pontos, saldo e gols apenas nos jogos entre os times empatados);
+     depois saldo geral, gols marcados e ordem alfabética. */
+  arr.sort((a,b)=> b.pts - a.pts);
+  const ordenado = [];
+  let i = 0;
+  while(i < arr.length){
+    let j = i;
+    while(j < arr.length && arr[j].pts === arr[i].pts) j++;
+    const bloco = arr.slice(i, j);
+    if(bloco.length > 1){
+      const h2h = confrontoDireto(grupo, bloco.map(t => t.time));
+      bloco.sort((a,b)=>
+        h2h[b.time].pts - h2h[a.time].pts ||
+        h2h[b.time].sg  - h2h[a.time].sg  ||
+        h2h[b.time].gp  - h2h[a.time].gp  ||
+        b.sg - a.sg || b.gp - a.gp ||
+        a.time.localeCompare(b.time));
+    }
+    ordenado.push(...bloco);
+    i = j;
+  }
+  return ordenado;
 }
 
 const LIGA_SOBE_PARA = { B:"A", C:"B", D:"C" }; // para onde sobe o 1º de cada liga
