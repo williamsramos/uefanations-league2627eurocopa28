@@ -12,7 +12,7 @@ const QUARTOS_PAREAMENTO = [
   { id:"qf1", p:"Alemanha",   s:"Bélgica",  idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"qf2", p:"França",     s:"Espanha",  idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"qf3", p:"Inglaterra", s:"Noruega",  idaData:"27/03/27 14:00", voltaData:"30/03/27 15:45" },
-  { id:"qf4", p:"Portugal",   s:"Paises Baixos",  idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" }
+  { id:"qf4", p:"Portugal",   s:"Países Baixos",  idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" }
 ];
 
 /* Estado do mata-mata (em memória, não persiste após recarregar) */
