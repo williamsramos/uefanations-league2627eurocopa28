@@ -1,21 +1,18 @@
 /* =======================================================================
    NATIONS_FINAL4.JS
-   Mata-mata da Liga A: os 2 primeiros de cada grupo (A1 a A4) — 8
-   seleções ao todo — disputam as Quartas de Final. Os vencedores
-   avançam às Meias-finais, depois à Final e ao jogo de 3º lugar.
+   Mata-mata da Liga A (Quartas de Final, Meias-finais, Final e 3º lugar)
+   e Play-offs de Acesso/Rebaixamento (Liga A/B e Liga B/C)
    ======================================================================= */
 
 const GRUPOS_LIGA_A = ["A1","A2","A3","A4"];
 
-/* Emparelhamento padrão das quartas: o 1º de um grupo encara o 2º de
-   outro grupo, evitando repetir logo de cara um adversário do próprio
-   grupo. Os confrontos são recalculados automaticamente conforme a
-   classificação muda — não há pareamento manual nesta fase. */
+/* Confrontos oficiais das Quartas de Final (Ida e Volta)
+   1º lugar (p) decide a volta em casa; 2º lugar (s) joga a ida em casa. */
 const QUARTOS_PAREAMENTO = [
-  { id:"qf1", casa:{grupo:"A1",pos:0}, fora:{grupo:"A4",pos:1} },
-  { id:"qf2", casa:{grupo:"A2",pos:0}, fora:{grupo:"A3",pos:1} },
-  { id:"qf3", casa:{grupo:"A3",pos:0}, fora:{grupo:"A2",pos:1} },
-  { id:"qf4", casa:{grupo:"A4",pos:0}, fora:{grupo:"A1",pos:1} }
+  { id:"qf1", p:"Alemanha",   s:"Bélgica",  idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
+  { id:"qf2", p:"França",     s:"Espanha",  idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
+  { id:"qf3", p:"Inglaterra", s:"Noruega",  idaData:"27/03/27 14:00", voltaData:"30/03/27 15:45" },
+  { id:"qf4", p:"Portugal",   s:"Holanda",  idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" }
 ];
 
 /* Estado do mata-mata (em memória, não persiste após recarregar) */
@@ -24,60 +21,21 @@ const final4State = {
     sf1:{ casa:"", fora:"", penCasa:"", penFora:"" },
     sf2:{ casa:"", fora:"", penCasa:"", penFora:"" },
     final:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    terceiro:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pab1:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pab2:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pab3:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pab4:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pbc1:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pbc2:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pbc3:{ casa:"", fora:"", penCasa:"", penFora:"" },
-    pbc4:{ casa:"", fora:"", penCasa:"", penFora:"" }
+    terceiro:{ casa:"", fora:"", penCasa:"", penFora:"" }
   }
 };
 
-/* Devolve o 1º e o 2º colocado atuais de um grupo da Liga A */
-function qualificadosGrupo(grupo){
-  const standings = computeStandings(grupo);
-  return { primeiro: standings[0].time, segundo: standings[1].time };
-}
-
-/* Resolve qual seleção ocupa um "slot" do pareamento (ex: 1º do A1) */
-function timeDoSlot(slot){
-  const q = qualificadosGrupo(slot.grupo);
-  return slot.pos === 0 ? q.primeiro : q.segundo;
-}
-
-/* Devolve {vencedor, empatou} de um confronto dados os placares e,
-   se necessário, os pênaltis escolhidos manualmente */
-function resolverConfronto(placar, timeCasa, timeFora){
-  const gc = parseInt(placar.casa), gf = parseInt(placar.fora);
-  if(placar.casa === "" || placar.fora === "" || isNaN(gc) || isNaN(gf)){
-    return { vencedor:null, empatou:false };
-  }
-  if(gc > gf) return { vencedor:timeCasa, empatou:false };
-  if(gc < gf) return { vencedor:timeFora, empatou:false };
-  // empate -> precisa de pênaltis
-  if(placar.penCasa !== "" || placar.penFora !== ""){
-    const pc = parseInt(placar.penCasa), pf = parseInt(placar.penFora);
-    if(!isNaN(pc) && !isNaN(pf) && pc !== pf){
-      return { vencedor: pc > pf ? timeCasa : timeFora, empatou:false };
-    }
-  }
-  return { vencedor:null, empatou:true };
-}
-
-/* Tira do ar os 8 qualificados (1º e 2º de cada grupo), agrupados */
+/* Lista os 8 classificados das Quartas de Final */
 function renderQualificados(){
   const container = document.getElementById("final4Semifinalistas");
+  if(!container) return;
   let html = "";
-  GRUPOS_LIGA_A.forEach(g=>{
-    const { primeiro, segundo } = qualificadosGrupo(g);
+  QUARTOS_PAREAMENTO.forEach((par, idx)=>{
     html += `<div class="final4-team-chip">
-      <span class="grupo-tag">${g}</span> <span class="qualif-pos">1º</span> ${flagImg(primeiro)} ${primeiro}
+      <span class="grupo-tag">QF${idx+1}</span> <span class="qualif-pos">1º</span> ${flagImg(par.p)} ${par.p}
     </div>`;
     html += `<div class="final4-team-chip">
-      <span class="grupo-tag">${g}</span> <span class="qualif-pos">2º</span> ${flagImg(segundo)} ${segundo}
+      <span class="grupo-tag">QF${idx+1}</span> <span class="qualif-pos">2º</span> ${flagImg(par.s)} ${par.s}
     </div>`;
   });
   container.innerHTML = html;
@@ -113,7 +71,7 @@ function renderMatchBox({ id, titulo, placarKey, timeCasaFixo, timeForaFixo }){
       <select class="f4-pen-select" data-key="${placarKey}">
         <option value="">-- escolher --</option>
         <option value="casa" ${placar.penCasa!==""&&parseInt(placar.penCasa)>parseInt(placar.penFora||0)?"selected":""}>${timeCasa}</option>
-        <option value="fora">${timeFora}</option>
+        <option value="fora" ${placar.penFora!==""&&parseInt(placar.penFora)>parseInt(placar.penCasa||0)?"selected":""}>${timeFora}</option>
       </select>
     </div>`;
   }
@@ -125,15 +83,28 @@ function renderMatchBox({ id, titulo, placarKey, timeCasaFixo, timeForaFixo }){
   return { html, vencedor: resultado.vencedor, perdedor: resultado.vencedor ? (resultado.vencedor===timeCasa?timeFora:timeCasa) : null, timeCasa, timeFora };
 }
 
-/* ---------- Quartas de Final: ida e volta ----------
-   "p" = 1º do grupo, "s" = 2º do grupo. Ida: o 2º joga em casa.
-   Volta: o 1º joga em casa. Vence quem tiver melhor agregado; se
-   empatar, escolhe-se quem vence nos pênaltis. */
+function resolverConfronto(placar, timeCasa, timeFora){
+  const gc = parseInt(placar.casa), gf = parseInt(placar.fora);
+  if(placar.casa === "" || placar.fora === "" || isNaN(gc) || isNaN(gf)){
+    return { vencedor:null, empatou:false };
+  }
+  if(gc > gf) return { vencedor:timeCasa, empatou:false };
+  if(gc < gf) return { vencedor:timeFora, empatou:false };
+  if(placar.penCasa !== "" || placar.penFora !== ""){
+    const pc = parseInt(placar.penCasa), pf = parseInt(placar.penFora);
+    if(!isNaN(pc) && !isNaN(pf) && pc !== pf){
+      return { vencedor: pc > pf ? timeCasa : timeFora, empatou:false };
+    }
+  }
+  return { vencedor:null, empatou:true };
+}
+
+/* ---------- Quartas de Final: ida e volta ---------- */
 const qfState = {};
 QUARTOS_PAREAMENTO.forEach(p=>{ qfState[p.id] = { ida:{p:"",s:""}, volta:{p:"",s:""}, pen:"" }; });
 
 function renderQuartaTie(par){
-  const tP = timeDoSlot(par.casa), tS = timeDoSlot(par.fora);
+  const tP = par.p, tS = par.s;
   const st = qfState[par.id];
   const completo = [st.ida.p, st.ida.s, st.volta.p, st.volta.s].every(v => v !== "" && !isNaN(parseInt(v)));
   let agg = "", res = "", vencedor = null, empate = false;
@@ -153,13 +124,13 @@ function renderQuartaTie(par){
   const html = `<div class="po-tie" data-qf="${par.id}">
     <div class="f4-match-header">Quartas de Final — Jogo ${par.id.replace("qf","")}</div>
     <div class="po-body">
-      <div class="po-leg-label">Ida</div>
+      <div class="po-leg-label">Ida · ${par.idaData}</div>
       <div class="po-leg">
         <span class="po-team">${flagImg(tS)} <span>${tS}</span></span>
         <span class="po-score">${inp("ida","s",st.ida.s)}-${inp("ida","p",st.ida.p)}</span>
         <span class="po-team right"><span>${tP}</span> ${flagImg(tP)}</span>
       </div>
-      <div class="po-leg-label">Volta</div>
+      <div class="po-leg-label">Volta · ${par.voltaData}</div>
       <div class="po-leg">
         <span class="po-team">${flagImg(tP)} <span>${tP}</span></span>
         <span class="po-score">${inp("volta","p",st.volta.p)}-${inp("volta","s",st.volta.s)}</span>
@@ -180,10 +151,8 @@ function renderQuartaTie(par){
 function renderFinal4(){
   renderQualificados();
 
-  /* ---- Quartas de Final (8 times, 4 jogos) ---- */
   const qf = QUARTOS_PAREAMENTO.map(par => renderQuartaTie(par));
 
-  /* ---- Meias-finais (vencedores das quartas, no bracket padrão) ---- */
   const sf1 = renderMatchBox({
     id:"sf1", titulo:"Meia-final 1", placarKey:"sf1",
     timeCasaFixo: qf[0].vencedor, timeForaFixo: qf[1].vencedor
@@ -193,7 +162,6 @@ function renderFinal4(){
     timeCasaFixo: qf[2].vencedor, timeForaFixo: qf[3].vencedor
   });
 
-  /* ---- Final e 3º lugar ---- */
   const finalBox = renderMatchBox({
     id:"final", titulo:"Final", placarKey:"final",
     timeCasaFixo: sf1.vencedor, timeForaFixo: sf2.vencedor
@@ -216,7 +184,7 @@ function renderFinal4(){
   const container = document.getElementById("final4Bracket");
   container.innerHTML = `
     ${bannerHtml}
-    <div class="f4-stage-title">Quartas de Final — ida e volta (1º e 2º de cada grupo da Liga A)</div>
+    <div class="f4-stage-title">Quartas de Final — ida e volta (Liga A)</div>
     <div class="po-grid">${qf.map(q=>q.html).join("")}</div>
     <div class="f4-stage-title">Meias-finais</div>
     <div class="f4-row">${sf1.html}${sf2.html}</div>
@@ -234,8 +202,6 @@ function renderFinal4(){
   }
 }
 
-/* Delegação de eventos: placares e pênaltis (funciona pra qualquer
-   fase — qf1..qf4, sf1, sf2, final, terceiro — pela chave data-key) */
 safeOn("final4Bracket", "input", (e)=>{
   const el = e.target;
   const key = el.dataset.key;
@@ -267,7 +233,7 @@ safeOn("final4Bracket", "input", (e)=>{
   st.pen = "";
   const sel = `.qf-in[data-qf="${el.dataset.qf}"][data-leg="${el.dataset.leg}"][data-side="${el.dataset.side}"]`;
   renderFinal4();
-  document.querySelector(sel)?.focus(); // mantém o cursor no campo após redesenhar
+  document.querySelector(sel)?.focus();
 });
 
 safeOn("final4Bracket", "change", (e)=>{
@@ -286,28 +252,25 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 /* =======================================================================
    PLAYOFFS DE ACESSO E REBAIXAMENTO (ida e volta)
-   Liga A/B: 2 piores 3º + 2 melhores 4º da Liga A  x  4 segundos da Liga B
-   Liga B/C: 4 últimos (4º) da Liga B  x  4 segundos da Liga C
-   Quem vence fica (ou sobe para) a liga superior. Os confrontos seguem o
-   ranking: melhor campanha da liga superior x pior da inferior.
-   Ida: o time da liga inferior joga em casa. Volta: o da superior.
+   Ida: time da liga inferior (tB) joga em casa.
+   Volta: time da liga superior (tA) joga em casa.
    ======================================================================= */
-const PLAYOFFS = [];
-[0,1,2,3].forEach(i=>{
-  PLAYOFFS.push({ id:`ab${i+1}`, tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i, altaKey:"rebaixA", baixaKey:"promoB" });
-});
-[0,1,2,3].forEach(i=>{
-  PLAYOFFS.push({ id:`bc${i+1}`, tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i, altaKey:"rebaixB", baixaKey:"promoC" });
-});
+const PLAYOFFS = [
+  // Liga A/B
+  { id:"ab1", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:0, tB:"Bósnia & Herzegovina", tA:"Dinamarca",     idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
+  { id:"ab2", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:1, tB:"Hungria",              tA:"Sérvia",        idaData:"25/03/27 16:45", voltaData:"28/03/27 13:00" },
+  { id:"ab3", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:2, tB:"Eslovênia",            tA:"País de Gales", idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" },
+  { id:"ab4", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:3, tB:"Irlanda",              tA:"Croácia",       idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" },
+
+  // Liga B/C
+  { id:"bc1", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:0, tB:"Chipre",               tA:"N. Macedonia",  idaData:"25/03/27 14:00", voltaData:"28/03/27 10:00" },
+  { id:"bc2", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:1, tB:"Bielorrússia",         tA:"Israel",        idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
+  { id:"bc3", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:2, tB:"Ilhas Faroé",          tA:"Geórgia",       idaData:"27/03/27 11:00", voltaData:"30/03/27 13:00" },
+  { id:"bc4", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:3, tB:"Estônia",              tA:"Romênia",       idaData:"27/03/27 14:00", voltaData:"30/03/27 15:45" }
+];
 
 const playoffState = {};
 PLAYOFFS.forEach(p=>{ playoffState[p.id] = { ida:{b:"",a:""}, volta:{a:"",b:""}, pen:"" }; });
-
-function timesPlayoff(p, cp){
-  const alta = cp[p.altaKey][p.i];
-  const baixa = cp[p.baixaKey][3 - p.i];
-  return { tA: alta ? alta.time : "—", tB: baixa ? baixa.time : "—" };
-}
 
 function resultadoPlayoff(p){
   const s = playoffState[p.id];
@@ -323,7 +286,8 @@ function resultadoPlayoff(p){
   return { completo:true, a, b, vencedor, empate };
 }
 
-function textoResultadoPlayoff(p, tAlta, tBaixa){
+function textoResultadoPlayoff(p){
+  const tAlta = p.tA, tBaixa = p.tB;
   const r = resultadoPlayoff(p);
   if(!r.completo) return { agg:"", res:"", pen:false };
   const agg = `Agregado: ${tBaixa} ${r.b} - ${r.a} ${tAlta}`;
@@ -337,7 +301,6 @@ function textoResultadoPlayoff(p, tAlta, tBaixa){
 function renderPlayoffs(){
   const c = document.getElementById("playoffsContainer");
   if(!c) return;
-  const cp = classificadosPlayoffs();
   const dicas = {
     "A/B": "2 piores 3º + 2 melhores 4º da Liga A contra os 4 segundos da Liga B, em ida e volta. Quem vence fica na (ou sobe para a) Liga A. Os 2 piores 4º da Liga A descem direto.",
     "B/C": "Os 4 últimos da Liga B contra os 4 segundos da Liga C, em ida e volta. Quem vence fica na (ou sobe para a) Liga B."
@@ -346,21 +309,21 @@ function renderPlayoffs(){
   ["A/B","B/C"].forEach(tipo=>{
     html += `<div class="f4-stage-title">Play-offs Liga ${tipo}</div><p class="hint centro">${dicas[tipo]}</p><div class="po-grid">`;
     PLAYOFFS.filter(p=>p.tipo===tipo).forEach(p=>{
-      const { tA, tB } = timesPlayoff(p, cp);
+      const { tA, tB } = p;
       const s = playoffState[p.id];
-      const t = textoResultadoPlayoff(p, tA, tB);
+      const t = textoResultadoPlayoff(p);
       const inp = (leg, side, val) =>
         `<input type="number" min="0" max="99" class="po-in" data-tie="${p.id}" data-leg="${leg}" data-side="${side}" value="${val}">`;
       html += `<div class="po-tie" data-tie="${p.id}">
         <div class="f4-match-header">Jogo ${p.i+1}</div>
         <div class="po-body">
-          <div class="po-leg-label">Ida</div>
+          <div class="po-leg-label">Ida · ${p.idaData}</div>
           <div class="po-leg">
             <span class="po-team">${flagImg(tB)} <span>${tB}</span></span>
             <span class="po-score">${inp("ida","b",s.ida.b)}-${inp("ida","a",s.ida.a)}</span>
             <span class="po-team right"><span>${tA}</span> ${flagImg(tA)}</span>
           </div>
-          <div class="po-leg-label">Volta</div>
+          <div class="po-leg-label">Volta · ${p.voltaData}</div>
           <div class="po-leg">
             <span class="po-team">${flagImg(tA)} <span>${tA}</span></span>
             <span class="po-score">${inp("volta","a",s.volta.a)}-${inp("volta","b",s.volta.b)}</span>
@@ -383,15 +346,12 @@ function renderPlayoffs(){
   c.innerHTML = html;
 }
 
-/* Atualiza só o resumo de um confronto (sem recriar os inputs, pra não
-   perder o foco enquanto se digita) */
 function atualizarTiePlayoff(id){
   const p = PLAYOFFS.find(x=>x.id===id);
   const card = document.querySelector(`.po-tie[data-tie="${id}"]`);
   if(!p || !card) return;
-  const { tA, tB } = timesPlayoff(p, classificadosPlayoffs());
   const r = resultadoPlayoff(p);
-  const t = textoResultadoPlayoff(p, tA, tB);
+  const t = textoResultadoPlayoff(p);
   card.querySelector(".po-agg").textContent = t.agg;
   card.querySelector(".po-result").textContent = t.res;
   card.querySelector(".po-pen").hidden = !(r.completo && r.empate);
@@ -416,8 +376,6 @@ safeOn("playoffsContainer", "change", (e)=>{
   atualizarTiePlayoff(el.dataset.tie);
 });
 
-/* Redesenha ao entrar na aba (os times mudam com a classificação) e ao
-   carregar a página */
 document.addEventListener("DOMContentLoaded", renderPlayoffs);
 safeOn("nationsSubTabs", "click", (e)=>{
   if(e.target.closest(".sub-tab-btn")?.dataset.sub === "final4") renderPlayoffs();
