@@ -21,11 +21,11 @@ const FLAGS = {
   "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia do Norte":"mk",
   "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge",  "Irlanda do Norte":"gb-nir",
   "Israel":"il", "Áustria":"at", "República da Irlanda":"ie", "Kosovo":"xk",
-  "Polónia":"pl", "Bósnia e Herzegovina":"ba" , "romênia":"ro", "Suécia":"se",
+  "Polónia":"pl", "Bósnia e Herzegovina":"ba" , "Romênia":"ro", "Suécia":"se",
   "Albânia":"al", "Finlândia":"fi", "Bielorrússia":"by", "San Marino":"sm",
   "Chipre":"cy", "Montenegro":"me", "Arménia":"am", "Letónia":"lv",
   "Ilhas Faroé":"fo","Cazaquistão":"kz", "Eslováquia":"sk", "República da Moldávia":"md",
-  "Islândia":"is", "Bulgária":"bg", "estônia":"ee", "Luxemburgo":"lu",
+  "Islândia":"is", "Bulgária":"bg", "Estônia":"ee", "Luxemburgo":"lu",
   "Gibraltar":"gi", "Malta":"mt", "Andorra":"ad",
   "Azerbaijão":"az", "Lituânia":"lt", "Liechtenstein":"li" ,
 };
