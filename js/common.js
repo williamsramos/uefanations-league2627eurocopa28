@@ -18,7 +18,7 @@ const FLAGS = {
   "Alemanha":"de", "Países Baixos":"nl", "Sérvia":"rs", "Grécia":"gr",
   "Espanha":"es", "Croácia":"hr", "Inglaterra":"gb-eng", "Chéquia":"cz",
   "Portugal":"pt", "Dinamarca":"dk", "Noruega":"no", "País de Gales":"gb-wls",
-  "Escócia":"gb-sct", "Suíça":"ch", "Eslovénia":"si", "Macedónia do Norte":"mk",
+  "Escócia":"gb-sct", "Suíça":"ch", "Eslovênia":"si", "Macedónia do Norte":"mk",
   "Hungria":"hu", "Ucrânia":"ua", "Geórgia":"ge",  "Irlanda do Norte":"gb-nir",
   "Israel":"il", "Áustria":"at", "República da Irlanda":"ie", "Kosovo":"xk",
   "Polónia":"pl", "Bósnia e Herzegovina":"ba" , "Romênia":"ro", "Suécia":"se",
