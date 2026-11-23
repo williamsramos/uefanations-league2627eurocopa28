@@ -263,7 +263,7 @@ const PLAYOFFS = [
   { id:"ab4", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:3, tB:"República da Irlanda",              tA:"Croácia",       idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" },
 
   // Liga B/C
-  { id:"bc1", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:0, tB:"Chipre",               tA:"Macedonia do Norte",  idaData:"25/03/27 14:00", voltaData:"28/03/27 10:00" },
+  { id:"bc1", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:0, tB:"Chipre",               tA:"Macedónia do Norte",  idaData:"25/03/27 14:00", voltaData:"28/03/27 10:00" },
   { id:"bc2", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:1, tB:"Bielorrússia",         tA:"Israel",        idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"bc3", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:2, tB:"Ilhas Faroé",          tA:"Geórgia",       idaData:"27/03/27 11:00", voltaData:"30/03/27 13:00" },
   { id:"bc4", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:3, tB:"Estônia",              tA:"Romênia",       idaData:"27/03/27 14:00", voltaData:"30/03/27 15:45" }
