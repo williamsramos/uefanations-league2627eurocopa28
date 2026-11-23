@@ -12,7 +12,7 @@ const QUARTOS_PAREAMENTO = [
   { id:"qf1", p:"Alemanha",   s:"Bélgica",  idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"qf2", p:"França",     s:"Espanha",  idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"qf3", p:"Inglaterra", s:"Noruega",  idaData:"27/03/27 14:00", voltaData:"30/03/27 15:45" },
-  { id:"qf4", p:"Portugal",   s:"Holanda",  idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" }
+  { id:"qf4", p:"Portugal",   s:"Paises Baixos",  idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" }
 ];
 
 /* Estado do mata-mata (em memória, não persiste após recarregar) */
@@ -257,13 +257,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
    ======================================================================= */
 const PLAYOFFS = [
   // Liga A/B
-  { id:"ab1", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:0, tB:"Bósnia & Herzegovina", tA:"Dinamarca",     idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
+  { id:"ab1", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:0, tB:"Bósnia e Herzegovina", tA:"Dinamarca",     idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"ab2", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:1, tB:"Hungria",              tA:"Sérvia",        idaData:"25/03/27 16:45", voltaData:"28/03/27 13:00" },
   { id:"ab3", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:2, tB:"Eslovênia",            tA:"País de Gales", idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" },
-  { id:"ab4", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:3, tB:"Irlanda",              tA:"Croácia",       idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" },
+  { id:"ab4", tipo:"A/B", ligaAlta:"A", ligaBaixa:"B", i:3, tB:"República da Irlanda",              tA:"Croácia",       idaData:"27/03/27 16:45", voltaData:"30/03/27 15:45" },
 
   // Liga B/C
-  { id:"bc1", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:0, tB:"Chipre",               tA:"N. Macedonia",  idaData:"25/03/27 14:00", voltaData:"28/03/27 10:00" },
+  { id:"bc1", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:0, tB:"Chipre",               tA:"Macedonia do Norte",  idaData:"25/03/27 14:00", voltaData:"28/03/27 10:00" },
   { id:"bc2", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:1, tB:"Bielorrússia",         tA:"Israel",        idaData:"25/03/27 16:45", voltaData:"28/03/27 15:45" },
   { id:"bc3", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:2, tB:"Ilhas Faroé",          tA:"Geórgia",       idaData:"27/03/27 11:00", voltaData:"30/03/27 13:00" },
   { id:"bc4", tipo:"B/C", ligaAlta:"B", ligaBaixa:"C", i:3, tB:"Estônia",              tA:"Romênia",       idaData:"27/03/27 14:00", voltaData:"30/03/27 15:45" }
